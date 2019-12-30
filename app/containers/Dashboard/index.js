@@ -1,6 +1,5 @@
 import React, { Children } from 'react';
 import clsx from 'clsx';
-import { Switch, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,10 +18,8 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import {
-  mainListItems,
-  secondaryListItems,
-} from './components/listitems/listitems';
+import { mainListItems, secondaryListItems } from './components/listitems/listitems';
+
 
 function Copyright() {
   return (
@@ -38,7 +35,8 @@ function Copyright() {
 }
 const Mains = props => {
   const { children } = props;
-};
+
+}
 
 const drawerWidth = 240;
 
@@ -122,6 +120,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard(props) {
+  const { children } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -131,35 +130,22 @@ export default function Dashboard(props) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  const { children } = props;
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
+      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden,
-            )}
+            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
+          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Dashboard
           </Typography>
           <IconButton color="inherit">
@@ -186,15 +172,14 @@ export default function Dashboard(props) {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
-
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
+          
           {children}
-          {/* <Paper className={fixedHeightPaper}>
+            {/* Recent Orders */}
             
-           
-          </Paper> */}
+          
           <Box pt={4}>
             <Copyright />
           </Box>

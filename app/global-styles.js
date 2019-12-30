@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
   html,
   body {
     height: 100%;
-    width: 100%;
+    width: 100% ;
     line-height: 1.5;
   }
 
@@ -26,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
   label {
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
+  }
+  a{
+    text-decoration:none;
   }
 `;
 
