@@ -11,6 +11,7 @@ export const initialState = fromJS({
   logined: false,
 });
 
+
 function signInReducer(state = initialState, action) {
   switch (action.type) {
     case LOGIN:

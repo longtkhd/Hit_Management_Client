@@ -13,10 +13,7 @@ import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
 import Dashboard from '../Dashboard/index';
 
-import HomePage from 'containers/HomePage/Loadable';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+
 import LoginPage from '../LoginPage';
 import MemberPage from '../MemberPage';
 import DashboardPage from '../DashboardPage/index'

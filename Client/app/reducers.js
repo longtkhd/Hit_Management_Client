@@ -20,5 +20,6 @@ export default function createReducer(injectedReducers = {}) {
     ...injectedReducers,
   });
 
-  return rootReducer;
+  const mergeWithRouterState = connectRouter(history);
+  return mergeWithRouterState(rootReducer);
 }

@@ -13,22 +13,25 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
+    
       <Link to="/admin/dashboard">
-        <ListItemText primary="Dashboard" />
+        <ListItem button>
+          <ListItemIcon>
+            <DashboardIcon />
+          </ListItemIcon>    
+            <ListItemText primary="Dashboard" />
+        </ListItem>
       </Link>
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <Link to="/admin/user">
-        <ListItemText primary="Users" />
-      </Link>
-    </ListItem>
+    <Link to="/admin/user">
+      <ListItem button>
+          <ListItemIcon>
+          <PeopleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Users" />
+      </ListItem>
+    </Link>  
+      
+   
     {/* 2 */}
     <ListItem button>
       <ListItemIcon>
