@@ -1,5 +1,6 @@
 import React from 'react';
 import{ useState, useEffect } from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -34,11 +35,16 @@ import reducer from './reducer';
 import saga from './saga';
 import { getAllUserAction } from './actions';
 
+import {
+  
+  TextField,
+} from '@material-ui/core';
 
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+
+// function createData(name, calories, fat, carbs, protein) {
+//   return { name, calories, fat, carbs, protein };
+// }
 
 
 
@@ -70,7 +76,7 @@ const headCells = [
   { id: 'name', numeric: false, disablePadding: true, label: 'Full Name' },
   { id: 'Phone', numeric: true, disablePadding: false, label: 'Phone' },
   { id: 'School Year', numeric: true, disablePadding: false, label: 'School Year' },
-  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  { id: 'Class', numeric: true, disablePadding: false, label: 'Class' },
   { id: 'Avatar', numeric: true, disablePadding: false, label: 'Avatar' },
 ];
 
@@ -83,7 +89,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        <TableCell padding="checkbox" >
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={numSelected === rowCount}
@@ -92,13 +98,13 @@ function EnhancedTableHead(props) {
           />
         </TableCell>
         {headCells.map(headCell => (
-          <TableCell
+          <TableCell align="left"
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
+            <TableSortLabel align="left"
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -110,6 +116,7 @@ function EnhancedTableHead(props) {
                 </span>
               ) : null}
             </TableSortLabel>
+            <TextField id="standard-basic" label="Search" />
           </TableCell>
         ))}
       </TableRow>
@@ -163,7 +170,7 @@ const EnhancedTableToolbar = props => {
         </Typography>
       ) : (
           <Typography className={classes.title} variant="h6" id="tableTitle">
-           HIT Users
+        HIT Users
         </Typography>
         )}
 
@@ -313,17 +320,17 @@ export  function MemberPage(props) {
               {stableSort(memberPage.users, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.name);
+                  const isItemSelected = isSelected(row.fullName);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.name)}
+                      onClick={event => handleClick(event, row.fullName)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.name}
+                      key={row.fullName}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -335,18 +342,18 @@ export  function MemberPage(props) {
                       <TableCell component="th" id={labelId} scope="row" padding="none">
                         {row.fullName}
                       </TableCell>
-                      <TableCell align="right">{row.phone}</TableCell>
-                      <TableCell align="right">{row.schoolYear}</TableCell>
-                      <TableCell align="right">{row.carbs}</TableCell>
-                      <TableCell align="right">{row.protein}</TableCell>
+                      <TableCell align = "right" >{row.phone}</TableCell>
+                      <TableCell align="right" >{row.schoolYear}</TableCell>
+                      <TableCell align="right" >{row.class}</TableCell>
+                      <TableCell align="right" ><Avatar  alt="avatar" src={`http://localhost:5000/user/${row._id}/avatar/large`}  /></TableCell>
                     </TableRow>
                   );
                 })}
-              {/* {emptyRows > 0 && (
+              {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )} */}
+              )}
             </TableBody>
           </Table>
         </TableContainer>

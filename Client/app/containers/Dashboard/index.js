@@ -19,6 +19,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './components/listitems/listitems';
+import logo from '../../images/logos/LogoHIT.png';
 
 
 function Copyright() {
@@ -164,9 +165,21 @@ export default function Dashboard(props) {
         open={open}
       >
         <div className={classes.toolbarIcon}>
+          <Link className={classes.logoLink} to="/">
+            <img align = "center"
+              className={classes.logoImage}
+              // src="/images/logos/brainalytica_logo.svg"
+              alt="anh"
+              src={logo}
+              style={{ width: "80px" , marginRight : "30px"}}
+            />
+          </Link>
           <IconButton onClick={handleDrawerClose}>
+            
             <ChevronLeftIcon />
+           
           </IconButton>
+         
         </div>
         <Divider />
         <List>{mainListItems}</List>
