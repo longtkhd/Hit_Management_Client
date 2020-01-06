@@ -21,9 +21,7 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100%;
     min-width: 100%;
   }
-  .makeStyles-appBarShift-5{
-        width: calc(99% - 240px) !important;
-  }
+ 
 
   p,
   label {

@@ -1,4 +1,6 @@
 import React from 'react';
+import{ useState, useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -20,26 +22,25 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import makeSelectMemberPage from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+import { getAllUserAction } from './actions';
+
+
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
+
 
 function desc(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -66,14 +67,14 @@ function getSorting(order, orderBy) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
-  { id: 'calories', numeric: true, disablePadding: false, label: 'Tên' },
-  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Full Name' },
+  { id: 'Phone', numeric: true, disablePadding: false, label: 'Phone' },
+  { id: 'School Year', numeric: true, disablePadding: false, label: 'School Year' },
   { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
-  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
+  { id: 'Avatar', numeric: true, disablePadding: false, label: 'Avatar' },
 ];
 
-function MemberPageHead(props) {
+function EnhancedTableHead(props) {
   const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = property => event => {
     onRequestSort(event, property);
@@ -99,7 +100,7 @@ function MemberPageHead(props) {
           >
             <TableSortLabel
               active={orderBy === headCell.id}
-              direction={order}
+              direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
               {headCell.label}
@@ -116,7 +117,7 @@ function MemberPageHead(props) {
   );
 }
 
-MemberPageHead.propTypes = {
+EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
@@ -146,7 +147,7 @@ const useToolbarStyles = makeStyles(theme => ({
   },
 }));
 
-const MemberPageToolbar = props => {
+const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -162,7 +163,7 @@ const MemberPageToolbar = props => {
         </Typography>
       ) : (
           <Typography className={classes.title} variant="h6" id="tableTitle">
-            Member
+           HIT Users
         </Typography>
         )}
 
@@ -183,7 +184,7 @@ const MemberPageToolbar = props => {
   );
 };
 
-MemberPageToolbar.propTypes = {
+EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
@@ -211,7 +212,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MemberPage() {
+export  function MemberPage(props) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -219,16 +220,32 @@ export default function MemberPage() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  useInjectReducer({ key: 'memberPage', reducer });
+  useInjectSaga({ key: 'memberPage', saga });
+  const { memberPage } = props;
+  console.log(memberPage)
+  // const rootClassName = classNames(classes.root, className, memberPage);
+
+  useEffect(() => {
+    props.onGetUsers({
+      filter: {
+        role: 'admin',
+      },
+    });
+    // console.log(memberPage)
+   
+  }, []);
+
 
   const handleRequestSort = (event, property) => {
-    const isDesc = orderBy === property && order === 'desc';
-    setOrder(isDesc ? 'asc' : 'desc');
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = rows.map(n => n.name);
+      const newSelecteds = memberPage.users.map(n => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -270,12 +287,12 @@ export default function MemberPage() {
 
   const isSelected = name => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, memberPage.users.length - page * rowsPerPage);
 
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <MemberPageToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -283,17 +300,17 @@ export default function MemberPage() {
             size={dense ? 'small' : 'medium'}
             aria-label="enhanced table"
           >
-            <MemberPageHead
+            <EnhancedTableHead
               classes={classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={rows.length}
+              rowCount={memberPage.users.length}
             />
             <TableBody>
-              {stableSort(rows, getSorting(order, orderBy))
+              {stableSort(memberPage.users, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.name);
@@ -316,27 +333,27 @@ export default function MemberPage() {
                         />
                       </TableCell>
                       <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.name}
+                        {row.fullName}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
-                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell align="right">{row.phone}</TableCell>
+                      <TableCell align="right">{row.schoolYear}</TableCell>
                       <TableCell align="right">{row.carbs}</TableCell>
                       <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
-              {emptyRows > 0 && (
+              {/* {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )}
+              )} */}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={memberPage.users.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -350,3 +367,27 @@ export default function MemberPage() {
     </div>
   );
 }
+
+
+const mapStateToProps = createStructuredSelector({
+  memberPage: makeSelectMemberPage(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    onGetUsers: body => dispatch(getAllUserAction(body)),
+ 
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  // withStyles(styles),
+  withConnect,
+)(MemberPage);
+

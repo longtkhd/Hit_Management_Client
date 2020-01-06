@@ -14,7 +14,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 export const mainListItems = (
   <div>
     
-      <Link to="/admin/dashboard">
+      <Link to="/dashboard">
         <ListItem button>
           <ListItemIcon>
             <DashboardIcon />
@@ -22,7 +22,7 @@ export const mainListItems = (
             <ListItemText primary="Dashboard" />
         </ListItem>
       </Link>
-    <Link to="/admin/user">
+    <Link to="/user">
       <ListItem button>
           <ListItemIcon>
           <PeopleIcon />

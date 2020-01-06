@@ -33,16 +33,22 @@ export default function App() {
   return (
     <AppWrapper>
       <Switch>
-        <Route exact path="/admin/login" component={LoginPage} />
+        <Route  path="/login" component={LoginPage} />
         {/* <Route exact path="/member" component={MemberPage} /> */}
         <PrivateRoute
-          path="/admin/user"
+          path="/user"
           layout={Dashboard}
           component={MemberPage}
           title="Dashboard Page"
         />
         <PrivateRoute
-          path="/admin/dashboard"
+          path="/admin"
+          layout={Dashboard}
+          component={MemberPage}
+          title="Thành Viên"
+        />
+        <PrivateRoute
+          path="/dashboard"
           layout={Dashboard}
           component={DashboardPage}
           title="Dashboard Page"
