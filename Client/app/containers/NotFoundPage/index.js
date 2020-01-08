@@ -6,16 +6,58 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-
-import H1 from 'components/H1';
-import messages from './messages';
+import { makeStyles } from '@material-ui/core/styles';
+import Background from './emoji.png';
+const useStyles = makeStyles(theme => ({
+  notFound: {
+    maxWidth: "520px",
+    width: "100%",
+    textAlign: "center",
+    lineHeight: "1.4",
+    position: "absolute",
+    left: "50%",
+    top: "50%",
+    transform: "translate(-50%, -50%)"
+  },
+  h1Class: {
+    fontFamily: "'Montserrat', sans-serif",
+    fontSize: "146px",
+    fontWeight: "700",
+    margin: "0px",
+    color: "#232323"
+  },
+  spanClass: {
+    display: "inline-block",
+    width: "120px",
+    height: "120px",
+    backgroundImage: `url(${Background})`,
+    backgroundSize: "cover",
+    zIndex: "-1"
+  },
+  h2Class: {
+    fontFamily: "'Montserrat', sans-serif",
+    fontSize: "22px",
+    fontWeight: "700",
+    margin: "0",
+    textTransform: "uppercase",
+    color: "#232323"
+  },
+  pClass: {
+    fontFamily: "'Montserrat', sans-serif",
+    color: "#787878",
+    fontWeight: "300"
+  }
+}));
 
 export default function NotFound() {
+  const classes = useStyles();
   return (
-    <article>
-      <H1>
-        <FormattedMessage {...messages.header} />
-      </H1>
-    </article>
+    <div className={classes.notFound}>
+      <div>
+        <h1 className={classes.h1Class}>4<span className={classes.spanClass} />4</h1>
+      </div>
+      <h2 lassName={classes.h2Class}>Oops! Page Not Be Found</h2>
+      <p className={classes.pClass}>Sorry but the page you are looking for does not exist</p>
+    </div>
   );
 }

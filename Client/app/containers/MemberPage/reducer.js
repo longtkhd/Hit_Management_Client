@@ -14,7 +14,7 @@
     error: false,
     success: false,
   };
-console.log(initialState);
+// console.log(initialState);
 
 const memberPageReducer = (state = initialState, action) =>
   produce(state, draft => {

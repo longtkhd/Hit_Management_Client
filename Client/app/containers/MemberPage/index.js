@@ -1,6 +1,7 @@
 import React from 'react';
 import{ useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
 
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -34,6 +35,9 @@ import makeSelectMemberPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { getAllUserAction } from './actions';
+import AddUserPage from '../AddUserPage/index';
+
+// import  DialogMember from '../../components/DialogMember/index';
 
 import {
   
@@ -66,6 +70,7 @@ function stableSort(array, cmp) {
     return a[1] - b[1];
   });
   return stabilizedThis.map(el => el[0]);
+  
 }
 
 function getSorting(order, orderBy) {
@@ -73,11 +78,11 @@ function getSorting(order, orderBy) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: true, label: 'Full Name' },
+  { id: 'name', numeric: false, disablePadding: false, label: '   Full Name' },
   { id: 'Phone', numeric: true, disablePadding: false, label: 'Phone' },
-  { id: 'School Year', numeric: true, disablePadding: false, label: 'School Year' },
+  { id: 'Email', numeric: true, disablePadding: false, label: 'Email' },
   { id: 'Class', numeric: true, disablePadding: false, label: 'Class' },
-  { id: 'Avatar', numeric: true, disablePadding: false, label: 'Avatar' },
+  { id: 'Status', numeric: true, disablePadding: false, label: 'Status' },
 ];
 
 function EnhancedTableHead(props) {
@@ -98,25 +103,29 @@ function EnhancedTableHead(props) {
           />
         </TableCell>
         {headCells.map(headCell => (
-          <TableCell align="left"
-            key={headCell.id}
+          <TableCell 
+            key={headCell.phone}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.id ? order : false}
+            sortDirection={orderBy === headCell.phone ? order : false}
           >
-            <TableSortLabel align="left"
+          
+            <TableSortLabel align="right"
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              <b align="right">{headCell.label}</b>
+              
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
               ) : null}
+              
+
             </TableSortLabel>
-            <TextField id="standard-basic" label="Search" />
+            {/* <TextField id="standard-basic" label="Search" /> */}
           </TableCell>
         ))}
       </TableRow>
@@ -152,9 +161,18 @@ const useToolbarStyles = makeStyles(theme => ({
   title: {
     flex: '1 1 100%',
   },
+  nameContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  avatar: {
+    marginRight: theme.spacing(1)
+  },
 }));
 
 const EnhancedTableToolbar = props => {
+  const [open, setOpen] = useState(true);
+
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -170,7 +188,7 @@ const EnhancedTableToolbar = props => {
         </Typography>
       ) : (
           <Typography className={classes.title} variant="h6" id="tableTitle">
-        HIT Users
+        {/* HIT Users */}
         </Typography>
         )}
 
@@ -181,15 +199,17 @@ const EnhancedTableToolbar = props => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
+          <Tooltip title="Thêm Mới">
+            <AddUserPage ></AddUserPage>
+            
           </Tooltip>
         )}
+      
+      
     </Toolbar>
   );
 };
+ 
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
@@ -217,6 +237,16 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
+  content: {
+    padding: 0
+  },
+  nameContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  avatar: {
+    marginRight: theme.spacing(2)
+  },
 }));
 
 export  function MemberPage(props) {
@@ -230,7 +260,7 @@ export  function MemberPage(props) {
   useInjectReducer({ key: 'memberPage', reducer });
   useInjectSaga({ key: 'memberPage', saga });
   const { memberPage } = props;
-  console.log(memberPage)
+  // console.log(memberPage)
   // const rootClassName = classNames(classes.root, className, memberPage);
 
   useEffect(() => {
@@ -252,7 +282,7 @@ export  function MemberPage(props) {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = memberPage.users.map(n => n.name);
+      const newSelecteds = memberPage.users.map(n => n._id);
       setSelected(newSelecteds);
       return;
     }
@@ -316,21 +346,24 @@ export  function MemberPage(props) {
               onRequestSort={handleRequestSort}
               rowCount={memberPage.users.length}
             />
+            
+           
             <TableBody>
               {stableSort(memberPage.users, getSorting(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.fullName);
+                  const isItemSelected = isSelected(row._id);
                   const labelId = `enhanced-table-checkbox-${index}`;
+                  
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row.fullName)}
+                      onClick={event => handleClick(event, row._id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.fullName}
+                      key={row._id}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -339,13 +372,25 @@ export  function MemberPage(props) {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
-                        {row.fullName}
+                      <TableCell>
+                        <div className={classes.nameContainer}>
+                          <Avatar
+                            className={classes.avatar}
+                            src={`http://localhost:5000/user/${row._id}/avatar/large`}
+                          >
+                            {row.fullName}
+                          </Avatar>
+                          <Typography variant="body1">{row.fullName}</Typography>
+                        </div>
                       </TableCell>
                       <TableCell align = "right" >{row.phone}</TableCell>
-                      <TableCell align="right" >{row.schoolYear}</TableCell>
+                      <TableCell align="right" >{row.email}</TableCell>
                       <TableCell align="right" >{row.class}</TableCell>
-                      <TableCell align="right" ><Avatar  alt="avatar" src={`http://localhost:5000/user/${row._id}/avatar/large`}  /></TableCell>
+                      <TableCell align="right" ></TableCell>
+                      {/* <TableCell align="right" ><Avatar alt="avatar" src={`http://localhost:5000/user/${row._id}/avatar/large`} />
+                      </TableCell> */}
+                      
+                      
                     </TableRow>
                   );
                 })}

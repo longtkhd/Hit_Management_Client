@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
 import Dashboard from '../Dashboard/index';
+import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 
 import LoginPage from '../LoginPage';
@@ -53,6 +54,8 @@ export default function App() {
           component={DashboardPage}
           title="Dashboard Page"
         />
+
+        <Route path="*" component={NotFoundPage} />
       </Switch>
 
       <GlobalStyle />

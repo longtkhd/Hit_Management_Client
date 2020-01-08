@@ -8,7 +8,7 @@ import * as types from './constants';
 import { getAllUserAction, getAllUserSuccessAction, getAllUserFalseAction} from './actions';
 
 export function* fetchGetAllUser(action){
-  console.log(action);
+  // console.log(action);
   try {
     const data = yield call(APICall, {
 
@@ -20,11 +20,11 @@ export function* fetchGetAllUser(action){
     });
 
     if(data){
-     console.log(data.data)
+    console.log(data.data)
       yield put(getAllUserSuccessAction(data.data));
     }else{
       yield put(getAllUserFalseAction({}));
-      console.log("chua co data");
+      console.log("fetch api failed");
     }
 
   }catch(error){
