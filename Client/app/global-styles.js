@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -31,6 +32,10 @@ const GlobalStyle = createGlobalStyle`
   a{
     text-decoration:none;
   }
+  .avatar - uploader > .ant - upload {
+  width: 128px;
+  height: 128px;
+}
 `;
 
 export default GlobalStyle;
