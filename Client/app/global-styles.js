@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
   }
   
+  
 
 .dropzone {
     min-height: 100px;

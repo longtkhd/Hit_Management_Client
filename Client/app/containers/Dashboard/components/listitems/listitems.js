@@ -34,14 +34,13 @@ export function MainListItems() {
         
       
   }}> 
-        <ListItemIcon  >
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Dashboard" />   
+        
+          <HomeIcon />
+          
+        <ListItemText primary="Dashboard" style={{ paddingLeft: "30px" }} />   
     </MenuItem> 
     
-        {/* ================= */}      
-   
+        {/* ================= */}         
     <MenuItem component={NavLink} to="/user" 
       activeStyle={{
         color: "white",
@@ -51,18 +50,17 @@ export function MainListItems() {
       }}> 
     
         
-        <ListItemIcon >
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Users" />
+        
+          <PeopleIcon />       
+        <ListItemText primary="Users" 
+          style={{ paddingLeft: "30px" }}
+        />
       
-      </MenuItem>
-   
+      </MenuItem> 
   
 
 
-
-   
+  
     {/* 2 */}
     {/* <ListItem button>
       <ListItemIcon>

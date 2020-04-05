@@ -6,19 +6,11 @@
  * contain code that should be seen on all pages. (e.g. navigation bar)
  */
 
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
-import Dashboard from '../Dashboard/index';
-import NotFoundPage from 'containers/NotFoundPage/Loadable';
-
-
-import LoginPage from '../LoginPage';
-import MemberPage from '../MemberPage';
-import DashboardPage from '../DashboardPage/index'
-
 import GlobalStyle from '../../global-styles';
 
 const AppWrapper = styled.div`
@@ -30,12 +22,19 @@ const AppWrapper = styled.div`
   flex-direction: column;
 `;
 
+const LoginPage = lazy(() => import("../LoginPage"));
+const MemberPage = lazy(() => import("../MemberPage"));
+const Dashboard = lazy(() => import("../Dashboard/index"));
+const NotFoundPage = lazy(() => import("containers/NotFoundPage/Loadable"));
+const DashboardPage = lazy(() => import("../DashboardPage/index"));
+
+
 export default function App() {
   return (
     <AppWrapper>
+      <Suspense fallback = {<p>loading...</p>}>
       <Switch>
         <Route  path="/login" component={LoginPage} />
-        {/* <Route exact path="/member" component={MemberPage} /> */}
         <PrivateRoute
           path="/user"
           layout={Dashboard}
@@ -59,6 +58,8 @@ export default function App() {
       </Switch>
 
       <GlobalStyle />
+
+      </Suspense>
     </AppWrapper>
   );
 }

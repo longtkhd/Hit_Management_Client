@@ -168,13 +168,13 @@ export default function Dashboard(props) {
           
           <IconButton 
             color="inherit" 
-            onClick={() => {
-              localStorage.removeItem('token');
-              localStorage.removeItem('isAuthenticated');
-             
-          }}>
+            >
             <Badge color="secondary">
-              < ExitToAppIcon />
+              < ExitToAppIcon onClick={() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('isAuthenticated');
+
+              }} />
             </Badge>
           </IconButton>
         </Toolbar>

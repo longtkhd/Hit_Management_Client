@@ -68,19 +68,23 @@ export function SignIn(props) {
     if (isAuth) {
       props.history.push('/admin');
     }
-  });
-  useEffect(() => {
-    const isAuth = localStorage.getItem('isAuthenticated');
-    if (isAuth) {
-      props.history.push('/admin');
-      props.dispatch(logOut());
-    }
-  }, [props]);
+  }), [props.signIn.logined];
 
-  const handleSubmit = event => {
-    props.dispatch(login(email, password));
+  // useEffect(() => {
+  //   const isAuth = localStorage.getItem('isAuthenticated');
+  //   if (!isAuth) {
+  //     props.history.push('/login');
+  //   }
+  // }), [];
+  
 
+  const handleSubmit= (event) => {
+    
+    props.onLogin(email, password);
     event.preventDefault();
+
+
+    
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -172,6 +176,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onLogin: (email, password) => dispatch(login(email, password)),
+
   };
 }
 const withConnect = connect(
