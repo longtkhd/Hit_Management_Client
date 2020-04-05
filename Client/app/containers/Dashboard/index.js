@@ -18,7 +18,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './components/listitems/listitems';
+import { MainListItems, secondaryListItems } from './components/listitems/listitems';
 import logo from '../../images/logos/LogoHIT.png';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -62,6 +62,9 @@ const useStyles = makeStyles(theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    boxShadow: "0 0 10px 1px rgba(115, 103, 240, 0.7)",
+    background: "linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7))",
+    borderRadius: "4px"
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -201,7 +204,8 @@ export default function Dashboard(props) {
          
         </div>
         <Divider />
-        <List>{mainListItems}</List>
+        {/* <List>{mainListItems}</List> */}
+        <MainListItems/>
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>

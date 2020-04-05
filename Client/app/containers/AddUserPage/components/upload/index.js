@@ -1,88 +1,73 @@
-import { Upload, Button, Icon } from 'antd';
-import React, { Component } from 'react';
-
-const fileList = [
-  {
-    uid: '-1',
-    name: 'img.jpg',
-    status: 'done',
-    url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-  },
-  
-];
-
-const props = {
-  // action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  listType: 'picture',
-  defaultFileList: [...fileList],
-};
+import React, { useState, useEffect } from "react"
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+// import { Card, CardHeader, CardBody, CardTitle } from "reactstrap"
+import { useDropzone } from "react-dropzone";
 
 
 
+function BasicDropzone(props) {
+  const [files, setFiles] = useState([])
+  const { getRootProps, getInputProps } = useDropzone({
+    accept: "image/*",
+    onDrop: acceptedFiles => {
+      setFiles(
+        acceptedFiles.map(file =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          })
+        )
+      )
+    }
+  })
 
+  const thumbs = files.map(file => (
+    <div className="dz-thumb" key={file.name}>
+      <div className="dz-thumb-inner">
+        <img src={file.preview} className="dz-img" alt={file.name} />
+      </div>
+    </div>
+  ))
+
+  useEffect(
+    () => () => {
+      // Make sure to revoke the data uris to avoid memory leaks
+      files.forEach(file => URL.revokeObjectURL(file.preview))
+    },
+    [files]
+  )
+
+  return (
+    <section>
+      <div {...getRootProps({ className: "dropzone" })}>
+        <input {...getInputProps()} />
+        <p className="mx-1">
+          Upload
+        </p>
+      </div>
+      <aside className="thumb-container">{thumbs}</aside>
+    </section>
+  )
+}
 
 class UploadImg extends React.Component {
-   state = {
-     loading: false,
-   };
-
-   handleChange = info => {
-     if (info.file.status === 'uploading') {
-       this.setState({ loading: true });
-       return;
-
-     }
-     if (info.file.status === 'done') {
-       console.log("success")
-
-       message.success(`${info.file.name} file uploaded successfully`)
-        //Get this url from response in real world.
-       getBase64(info.file.originFileObj, imageUrl =>
-         this.setState({
-           imageUrl,
-           loading: false,
-         }),
-       );
-     }
-   };
-
   render() {
-    //  const uploadButton = (
-    //    <div>
-    //      <Icon type={this.state.loading ? 'loading' : 'plus'} />
-    //      <div className="ant-upload-text">{this.props.name}</div>
-    //    </div>
-    //  );
-    //  const { imageUrl } = this.state;
-    //  return (
-    //    <Upload
-    //      name="avatar"
-    //      listType="picture-card"
-    //      className="avatar-uploader"
-    //      showUploadList={true}
-    //      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-    //      beforeUpload={beforeUpload}
-    //      onChange={this.handleChange}
-    //    >
-    //      {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-    //    </Upload>
-    //  );
-    return(
-    <div>
-      <Upload {...props}
-          onChange={this.handleChange}
-      >
-        <Button>
-          <Icon type="upload" /> {this.props.name}
-        </Button>
-      </Upload>
-      <br />
-      <br />
-      
-    </div>
+    return (
+      <Card>
+        <CardHeader>
+         Avatar
+        </CardHeader>
+        <CardContent>
+          <BasicDropzone />
+        </CardContent>
+      </Card>
     )
   }
 }
+
+
+
 
 export default UploadImg;

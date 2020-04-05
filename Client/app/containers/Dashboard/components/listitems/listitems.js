@@ -4,44 +4,67 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import { makeStyles } from '@material-ui/styles';
 
-export const mainListItems = (
-  <div>
+export function MainListItems() {
+
+
+  return (
+  
+    <MenuList>
     
-    <NavLink to="/dashboard" className = "link" activeStyle={{
-      fontWeight: "bold",
-      color: "#01579b",
-      // backgroundColor:"black"
-    }} > 
-        <ListItem button>
-          <ListItemIcon>
-            <DashboardIcon />
-          </ListItemIcon>    
-            <ListItemText primary="Dashboard" />
-        </ListItem>
-    </NavLink>
-    <NavLink to="/user" className="link" activeStyle={{
-      fontWeight: "bold",
-      color: "#01579b",
-      // backgroundColor:"black"
-    }} > 
-      <ListItem button>
-          <ListItemIcon>
-          <PeopleIcon />
-          </ListItemIcon>
-          <ListItemText primary="Users" />
-      </ListItem>
-    </NavLink>  
+    <MenuItem component={NavLink} to="/dashboard" 
+      activeStyle={{
+        
+          color:"white",
+          borderRadius:"4px",
+          boxShadow: "0 0 10px 1px rgba(115, 103, 240, 0.7)" ,
+          background: "linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7))"
+        
+        
       
+  }}> 
+        <ListItemIcon  >
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Dashboard" />   
+    </MenuItem> 
+    
+        {/* ================= */}      
+   
+    <MenuItem component={NavLink} to="/user" 
+      activeStyle={{
+        color: "white",
+        borderRadius: "4px",
+        boxShadow: "0 0 10px 1px rgba(115, 103, 240, 0.7)",
+        background: "linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7))"
+      }}> 
+    
+        
+        <ListItemIcon >
+          <PeopleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Users" />
+      
+      </MenuItem>
+   
+  
+
+
+
    
     {/* 2 */}
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
@@ -58,9 +81,10 @@ export const mainListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItem>
-  </div>
+    </ListItem> */}
+    </MenuList>
 );
+}
 
 export const secondaryListItems = (
   <div>
