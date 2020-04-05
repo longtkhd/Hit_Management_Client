@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -8,6 +8,10 @@ const GlobalStyle = createGlobalStyle`
     width: 100% ;
     line-height: 1.5;
   }
+  .link {
+    color: inherit;
+    text-decoration: none;
+}
 
   body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -36,6 +40,7 @@ const GlobalStyle = createGlobalStyle`
   width: 128px;
   height: 128px;
 }
+
 `;
 
 export default GlobalStyle;

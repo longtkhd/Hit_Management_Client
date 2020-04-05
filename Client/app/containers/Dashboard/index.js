@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { useState, useEffect }  from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,6 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './components/listitems/listitems';
 import logo from '../../images/logos/LogoHIT.png';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 function Copyright() {
@@ -34,10 +35,10 @@ function Copyright() {
     </Typography>
   );
 }
-const Mains = props => {
-  const { children } = props;
+// const Mains = props => {
+//   const { children } = props;
 
-}
+// }
 
 const drawerWidth = 240;
 
@@ -121,6 +122,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard(props) {
+  // useEffect(() => {
+  //   const isAuth = localStorage.getItem('isAuthenticated');
+  //   if (!isAuth) {
+  //     props.history.push('/login');
+  //   }
+  // });
   const { children } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -151,8 +158,20 @@ export default function Dashboard(props) {
             Dashboard
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={0} color="secondary">
               <NotificationsIcon />
+            </Badge>
+          </IconButton >
+          
+          <IconButton 
+            color="inherit" 
+            onClick={() => {
+              localStorage.removeItem('token');
+              localStorage.removeItem('isAuthenticated');
+             
+          }}>
+            <Badge color="secondary">
+              < ExitToAppIcon />
             </Badge>
           </IconButton>
         </Toolbar>
