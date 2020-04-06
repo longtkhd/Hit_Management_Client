@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { takeLatest, call, put, delay} from 'redux-saga/effects';
 import axios from 'axios';
 import { loginSucceed, loginFaild } from './actions';
 import * as types from './constants';
@@ -20,6 +20,7 @@ export function* login(action) {
       console.log('data');
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('isAuthenticated', true);
+      
       yield put(loginSucceed(data.data.token));
     }
   } catch (error) {}

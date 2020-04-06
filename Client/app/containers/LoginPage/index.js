@@ -66,16 +66,12 @@ export function SignIn(props) {
   useEffect(() => {
     const isAuth = localStorage.getItem('isAuthenticated');
     if (isAuth) {
+      console.log(props.history);
       props.history.push('/admin');
     }
-  }), [props.signIn.logined];
+  }), [props.signIn.isLoading];
 
-  // useEffect(() => {
-  //   const isAuth = localStorage.getItem('isAuthenticated');
-  //   if (!isAuth) {
-  //     props.history.push('/login');
-  //   }
-  // }), [];
+  
   
 
   const handleSubmit= (event) => {
@@ -87,8 +83,11 @@ export function SignIn(props) {
     
   };
   return (
+    
     <Container component="main" maxWidth="xs">
+      
       <CssBaseline />
+      
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -159,7 +158,9 @@ export function SignIn(props) {
       <Box mt={8}>
         <Copyright />
       </Box>
+      
     </Container>
+    
   );
 }
 SignIn.propTypes = {

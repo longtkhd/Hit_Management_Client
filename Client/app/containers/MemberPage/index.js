@@ -378,7 +378,7 @@ export  function MemberPage(props) {
                             className={classes.avatar}
                             src={`http://localhost:5000/user/${row._id}/avatar/large`}
                           >
-                            {row.fullName}
+                           
                           </Avatar>
                           <Typography variant="body1">{row.fullName}</Typography>
                         </div>

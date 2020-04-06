@@ -21,6 +21,15 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { MainListItems, secondaryListItems } from './components/listitems/listitems';
 import logo from '../../images/logos/LogoHIT.png';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import makeSelectSignIn from '../LoginPage/selectors';
+import reducer from '../LoginPage/reducer';
+import saga from '../LoginPage/reducer';
+import { login, logOut } from '../LoginPage/actions';
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
 
 
 function Copyright() {
@@ -124,13 +133,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Dashboard(props) {
+export  function Dashboard(props) {
   // useEffect(() => {
   //   const isAuth = localStorage.getItem('isAuthenticated');
   //   if (!isAuth) {
   //     props.history.push('/login');
   //   }
-  // });
+  //   console.log('a');
+  // }), [];
   const { children } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
@@ -173,6 +183,8 @@ export default function Dashboard(props) {
               < ExitToAppIcon onClick={() => {
                 localStorage.removeItem('token');
                 localStorage.removeItem('isAuthenticated');
+                window.location.href = '/login';
+              
 
               }} />
             </Badge>
@@ -198,10 +210,8 @@ export default function Dashboard(props) {
           </Link>
           <IconButton onClick={handleDrawerClose}>
             
-            <ChevronLeftIcon />
-           
-          </IconButton>
-         
+            <ChevronLeftIcon />          
+          </IconButton>         
         </div>
         <Divider />
         {/* <List>{mainListItems}</List> */}
@@ -225,3 +235,30 @@ export default function Dashboard(props) {
     </div>
   );
 }
+
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+   
+
+  };
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    SignIn: state.logined,
+  }
+}
+
+
+const withConnect = connect(
+  mapStateToProps,
+
+);
+export default compose(
+
+  withConnect,
+)(Dashboard);
+

@@ -9,9 +9,13 @@
 import React, { Suspense, lazy } from 'react';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Router} from 'react-router-dom';
 import PrivateRoute from '../../components/PrivateRoute';
 import GlobalStyle from '../../global-styles';
+import CircularIndeterminate from '../../components/Loading/loading';
+import history from '../../utils/history';
+
+
 
 const AppWrapper = styled.div`
   
@@ -29,11 +33,15 @@ const NotFoundPage = lazy(() => import("containers/NotFoundPage/Loadable"));
 const DashboardPage = lazy(() => import("../DashboardPage/index"));
 
 
+
 export default function App() {
   return (
+    <Router history={history}>
+    <Suspense fallback={<CircularIndeterminate></CircularIndeterminate>} >
     <AppWrapper>
-      <Suspense fallback = {<p>loading...</p>}>
+      
       <Switch>
+        
         <Route  path="/login" component={LoginPage} />
         <PrivateRoute
           path="/user"
@@ -55,11 +63,11 @@ export default function App() {
         />
 
         <Route path="*" component={NotFoundPage} />
+      
       </Switch>
-
-      <GlobalStyle />
-
-      </Suspense>
+      <GlobalStyle />    
     </AppWrapper>
+    </Suspense>
+    </Router>
   );
 }
