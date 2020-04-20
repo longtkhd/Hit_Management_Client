@@ -78,7 +78,7 @@ function getSorting(order, orderBy) {
 }
 
 const headCells = [
-  { id: 'name', numeric: false, disablePadding: false, label: '   Full Name' },
+  { id: 'name', numeric: false, disablePadding: false, label: 'Full Name' },
   { id: 'Phone', numeric: true, disablePadding: false, label: 'Phone' },
   { id: 'Email', numeric: true, disablePadding: false, label: 'Email' },
   { id: 'Class', numeric: true, disablePadding: false, label: 'Class' },

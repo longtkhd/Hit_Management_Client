@@ -64,12 +64,22 @@ export function SignIn(props) {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
+
     const isAuth = localStorage.getItem('isAuthenticated');
-    if (isAuth) {
-      console.log(props.history);
+    if ( isAuth) {
+      console.log(props.singIn);
+      
       props.history.push('/admin');
     }
   }), [props.signIn.isLoading];
+
+  useEffect(() => {  
+    const isAuth = localStorage.getItem('isAuthenticated');
+    if (props.signIn.logined || isAuth) {
+      props.history.push('/admin');
+      props.dispatch(logOut());
+    }
+  }), [];
 
   
   

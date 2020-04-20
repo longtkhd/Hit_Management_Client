@@ -35,7 +35,7 @@ class PrivateRoute extends React.Component {
   isLoginSystem() {
     return localStorage.getItem('isAuthenticated');
   }
-}
+} 
 
 PrivateRoute.propTypes = {
   component: PropTypes.any,

@@ -57,7 +57,7 @@ export default function App() {
         />
         <PrivateRoute
           path="/dashboard"
-          layout={Dashboard}
+           layout={Dashboard}
           component={DashboardPage}
           title="Dashboard Page"
         />

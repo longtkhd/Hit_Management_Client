@@ -181,9 +181,10 @@ export  function Dashboard(props) {
             >
             <Badge color="secondary">
               < ExitToAppIcon onClick={() => {
-                localStorage.removeItem('token');
-                localStorage.removeItem('isAuthenticated');
-                window.location.href = '/login';
+               //localStorage.clear();
+                // console.log(props.children.props.history.push);
+                props.children.props.history.push("/login");
+                localStorage.clear();
               
 
               }} />
