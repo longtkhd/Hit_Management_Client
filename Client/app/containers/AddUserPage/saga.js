@@ -41,6 +41,7 @@ export function* createUser(action) {
     });
 
     if (createdUser) {
+      console.log('creat user success');
       yield put(createUserSuccessAction());
       yield put({
         type: types.GET_USER,
@@ -53,7 +54,7 @@ export function* createUser(action) {
   }
 }
 
-export default function* addUserSaga() {
+export default function* addUserPageSaga() {
   
   yield takeLatest(types.CREATE_USER, createUser);
   

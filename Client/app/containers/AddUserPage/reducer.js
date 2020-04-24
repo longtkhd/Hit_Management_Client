@@ -16,7 +16,7 @@ export const initialState = {
   success: false,
 };
 
-const addUserReducer = (state = initialState, action) =>
+const addUserPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CREATE_USER:
@@ -33,4 +33,4 @@ const addUserReducer = (state = initialState, action) =>
     }
   });
 
-export default addUserReducer;
+export default addUserPageReducer;

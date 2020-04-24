@@ -18,7 +18,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import TextField from '@material-ui/core/TextField';
 import bg from '../../images/chat-bg-3.png';
-import MaterialUIPickers from '../../components/Crud/datepicker';
+import MaterialUIPickers from '../../components/Crud//datePicker/datepicker';
 import NativeSelects from '../../components/Crud/select.js/index.js';
 import EditIcon from '@material-ui/icons/Edit';
 

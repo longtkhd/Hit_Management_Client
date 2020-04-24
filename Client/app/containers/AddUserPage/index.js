@@ -18,8 +18,24 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import TextField from '@material-ui/core/TextField';
 import bg from '../../images/chat-bg-3.png';
-import MaterialUIPickers from '../../components/Crud/datepicker';
+import MaterialUIPickers from '../../components/Crud/datePicker/datepicker';
 import NativeSelects from '../../components/Crud/select.js/index.js';
+import RoleSelect from '../../components/Crud/select.js/roleselect';
+import RadioButtonsGroup from '../../components/Ratio';
+import { createUserAction} from './actions';
+
+//=====================================
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import makeSelectMemberPage from './selectors';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import reducer from './reducer';
+import saga from './saga';
+import { createStructuredSelector } from 'reselect';
+//====================================
+// import makeSelectaddUserPage from './'
 
 // import Switch from '@material-ui/core/Switch';
 import {
@@ -64,7 +80,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function AddUserPage(props) {
+export function AddUserPage(props) {
 
   const [dob, setDob] = React.useState('2000/09/27');
  
@@ -86,27 +102,27 @@ export default function AddUserPage(props) {
   const [isFormer, setIsFormer] = useState(false);
   const [isActive, setIsActive] = useState(true);
 
-  function handleSubmit(props) {
-    // props.onCreateUser({
-    //   ...{ fullName },
-    //   ...{ email },
-    //   ...{ role },
-    //   ...{ studentCode },
-    //   class: schoolClass,
-    //   ...{ clubYear },
-    //   ...{ faculty },
-    //   ...{ schoolYear },
-    //   ...{ phone },
-    //   ...{ address },
-    //   ...{ dob },
-    //   ...{ position },
-    //   ...{ gender },
-    //   ...{ isActive },
-    //   ...{ bio },
-    //   ...{ avatar },
-    //   ...{ qrCode },
-    //   ...{ isFormer },
-    // });
+  function handleSubmit() {
+    props.onCreateUser({
+      ...{ fullName },
+      ...{ email },
+      ...{ role },
+      ...{ studentCode },
+      class: schoolClass,
+      ...{ clubYear },
+      ...{ faculty },
+      ...{ schoolYear },
+      ...{ phone },
+      ...{ address },
+      ...{ dob },
+      ...{ position },
+      ...{ gender },
+      ...{ isActive },
+      ...{ bio },
+      ...{ avatar },
+      ...{ qrCode },
+      ...{ isFormer },
+    });
 
     console.log({
       ...{ fullName },
@@ -127,13 +143,15 @@ export default function AddUserPage(props) {
       ...{ qrCode },
       ...{ isFormer },
     });
-     props.handleClose();
+    
+ 
     
 }
 // =============================================
 //==============================================
 //==============================================
-  
+  useInjectReducer({ key: 'addUserPage', reducer });
+  useInjectSaga({ key: 'addUserPage', saga });
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -164,7 +182,7 @@ export default function AddUserPage(props) {
             <Typography variant="h6" className={classes.title}>
               Cancel
             </Typography>
-              <Button color="inherit" type='submit' >
+              <Button color="inherit" type='submit' onClick={handleClose} >
               save
             </Button>
           </Toolbar>
@@ -216,7 +234,7 @@ export default function AddUserPage(props) {
                   </Grid>
 
                   <Grid item xs={6}>
-                    <TextValidator
+                    {/* <TextValidator
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
@@ -226,7 +244,10 @@ export default function AddUserPage(props) {
                       onChange={e => setRole(e.target.value)}
                       value = {role}
                       margin="normal"
-                    />
+                    /> */}
+                    <div className={classes.textField} style={{ marginTop: '7px' }}>
+                      <RoleSelect onSelect={value => setRole(value)}></RoleSelect>
+                    </div>
                   </Grid>
                   <Grid item xs={6}>
                     <TextValidator
@@ -366,7 +387,7 @@ export default function AddUserPage(props) {
                       margin="normal"
                     /> */}
                     <div className={classes.textField} style={{ marginTop: '7px' }}>
-                    <NativeSelects ></NativeSelects>
+                    <NativeSelects onSelect = {value => setGender(value)}></NativeSelects>
                     </div>
                   </Grid>
                   
@@ -386,17 +407,18 @@ export default function AddUserPage(props) {
                     />
                   </Grid>
                   <Grid item xs={6}>
-                    <TextValidator
+                    {/* <TextValidator
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      label="Status"
+                      label="IsActive"
                       margin="normal"
                       onChange={e => setIsActive(e.target.value)}
                       value = {isActive}
-                    />
+                    /> */}
+                    <RadioButtonsGroup onRatio = {value => setIsActive(value)}/>
                   </Grid>
 
                   <Grid item xs={6}>
@@ -443,7 +465,7 @@ export default function AddUserPage(props) {
                   >
                     <UploadImg 
                       name ='Avatar'
-                      onChange={(value) => setAvatar(value)}
+                      onFiles={value => setAvatar(value)}
                       
                       
                     />
@@ -458,8 +480,7 @@ export default function AddUserPage(props) {
                   
                   <Grid item xs={5}
                     style={{ paddingTop: '50px' }}>
-                    <UploadImg name='QR Code' onChange={(value) => setQrCode(value)}/>
-                 
+                    <UploadImg name='QR Code' onFiles={(value) => setQrCode(value)}/>                 
                   </Grid>                                  
 
 
@@ -474,3 +495,31 @@ export default function AddUserPage(props) {
     </div>
   );
 }
+
+
+AddUserPage.propTypes = {
+  classes: PropTypes.object,
+};
+const mapStateToProps = createStructuredSelector({
+  addUserPage: makeSelectMemberPage(),
+});
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    // onGetUsers: query => dispatch(getUsers(query)),
+    onCreateUser: newUser => dispatch(createUserAction(newUser)),
+    
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  // withStyles(styles),
+  withConnect,
+)(AddUserPage);

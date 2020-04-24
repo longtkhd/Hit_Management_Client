@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NativeSelects(props) {
+export default function RoleSelect(props) {
   const { onSelect} = props;
   const classes = useStyles();
   const [age, setAge] = React.useState('');
@@ -31,15 +31,15 @@ export default function NativeSelects(props) {
     <div>
       
       <FormControl variant="filled" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-filled-label">Giới Tính</InputLabel>
+        <InputLabel id="demo-simple-select-filled-label">Chức Vụ</InputLabel>
         <Select
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
           value={age}
           onChange={handleChange}
         >
-          <MenuItem value={'male'}>Nam</MenuItem>
-          <MenuItem value={'female'}>Nữ</MenuItem>
+          <MenuItem value={'5dedee326d15ff3f4593013f'}>Admin</MenuItem>
+          <MenuItem value={'5dedee326d15ff3f45930140'}>User</MenuItem>
           
         </Select>
       </FormControl>

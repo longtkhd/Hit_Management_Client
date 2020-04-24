@@ -11,14 +11,17 @@ import Typography from '@material-ui/core/Typography';
 import { useDropzone } from "react-dropzone"
 
 function ProgrammaticallyDropzone(props) {
-  const { onChange } = props;
+ 
+  
   const [files, setFiles] = useState([])
+  // console.log(files[0]);
   const { getRootProps, getInputProps, open } = useDropzone({
     accept: "image/*",
+   
     
-    onDrop: acceptedFiles => {
-      console.log(acceptedFiles[0]),
-        (acceptedFiles) => onChange(acceptedFiles[0]),
+    onDrop: acceptedFiles => {  
+      props.onFiles(acceptedFiles[0])
+      
       setFiles(
         acceptedFiles.map(file =>
           Object.assign(file, {
@@ -41,9 +44,19 @@ function ProgrammaticallyDropzone(props) {
     () => () => {
       // Make sure to revoke the data uris to avoid memory leaks
       files.forEach(file => URL.revokeObjectURL(file.preview))
+        
+    
     },
     [files]
   )
+  useEffect (()=> () => {
+   
+    console.log(files)
+
+    
+
+    
+  },[files])
 
   return (
     <section>
@@ -62,8 +75,9 @@ function ProgrammaticallyDropzone(props) {
   )
 }
 
-class UploadImg extends React.Component {
-  render() {
+function UploadImg(props) {
+  const { onFiles } = props;
+  
     return (
       <Card>
         <CardHeader>
@@ -73,13 +87,13 @@ class UploadImg extends React.Component {
         <CardContent>
         
         
-          <ProgrammaticallyDropzone />
+          <ProgrammaticallyDropzone onFiles={onFiles}/>
         
         </CardContent>
         
       </Card>
     )
-  }
+  
 }
 
 export default UploadImg;
