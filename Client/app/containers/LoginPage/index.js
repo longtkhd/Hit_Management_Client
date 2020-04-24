@@ -24,13 +24,14 @@ import makeSelectSignIn from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { login, logOut } from './actions';
+import bg from '../../images/pages/login.jpg'
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body2" color="textSecondary" align="center" style = {{bottom:0}}>
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Hit Club
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -39,11 +40,19 @@ function Copyright() {
 }
 
 const useStyles = makeStyles(theme => ({
+    root: {
+    backgroundImage: `url(${bg})`,
+
+   
+    height: '100%',
+    },
+ 
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+   
   },
   avatar: {
     margin: theme.spacing(1),
@@ -94,18 +103,22 @@ export function SignIn(props) {
   };
   return (
     
-    <Container component="main" maxWidth="xs">
+    
+    <Container component="main" maxWidth="xs" >
+    
       
-      <CssBaseline />
       
+      <CssBaseline className={classes.Container}/>
+        
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        
+        
+        
         <ValidatorForm onSubmit={handleSubmit} />
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
+         
         <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
@@ -170,6 +183,7 @@ export function SignIn(props) {
       </Box>
       
     </Container>
+    
     
   );
 }

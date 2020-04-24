@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import bg from './images/pages/login.jpg';
 // import 'antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`
@@ -7,13 +8,14 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100% ;
     line-height: 1.5;
+     background-image : url("./images/pages/login.jpg") !important;
   }
   
   
 
 .dropzone {
     min-height: 100px;
-    border: 2px dashed #ffb74d;
+     border: 1px dashed #7367f0;
     background: $body-bg;
     display: flex;
     justify-content: center;
@@ -63,11 +65,15 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: #fafafa;
+    
     min-height: 100%;
     min-width: 100%;
+
+
+
+
   }
- 
+
 
   p,
   label {

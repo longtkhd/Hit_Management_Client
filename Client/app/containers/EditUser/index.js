@@ -1,4 +1,4 @@
-import React , {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
@@ -20,6 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import bg from '../../images/chat-bg-3.png';
 import MaterialUIPickers from '../../components/Crud/datepicker';
 import NativeSelects from '../../components/Crud/select.js/index.js';
+import EditIcon from '@material-ui/icons/Edit';
 
 // import Switch from '@material-ui/core/Switch';
 import {
@@ -27,7 +28,7 @@ import {
   FormControlLabel,
   Switch,
 } from '@material-ui/core';
-import UploadImg from '../../components/Crud/upload/test';
+import UploadImg from '../../components/Crud/upload';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -42,13 +43,13 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
   },
   textField: {
-    
+
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: "97%",
-   
+
   },
-  Dialog:{
+  Dialog: {
     marginLeft: 255,
     backgroundColor: '#f8fafc',
     // backgroundImage: `url(${bg})`
@@ -56,18 +57,19 @@ const useStyles = makeStyles(theme => ({
   Toolbar: {
     background: "linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7))",
   },
- 
-  
+
+
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function AddUserPage(props) {
+export default function EditUser(props) {
+  
 
-  const [dob, setDob] = React.useState('2000/09/27');
- 
+  const [dob, setDob] = React.useState('');
+
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('');
@@ -80,65 +82,23 @@ export default function AddUserPage(props) {
   const [address, setAddress] = useState('');
   const [position, setPosition] = useState('');
   const [gender, setGender] = useState('');
+  const [isActive, setIsActive] = useState(true);
   const [bio, setBio] = useState('');
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
   const [isFormer, setIsFormer] = useState(false);
-  const [isActive, setIsActive] = useState(true);
 
-  function handleSubmit(props) {
-    // props.onCreateUser({
-    //   ...{ fullName },
-    //   ...{ email },
-    //   ...{ role },
-    //   ...{ studentCode },
-    //   class: schoolClass,
-    //   ...{ clubYear },
-    //   ...{ faculty },
-    //   ...{ schoolYear },
-    //   ...{ phone },
-    //   ...{ address },
-    //   ...{ dob },
-    //   ...{ position },
-    //   ...{ gender },
-    //   ...{ isActive },
-    //   ...{ bio },
-    //   ...{ avatar },
-    //   ...{ qrCode },
-    //   ...{ isFormer },
-    // });
 
-    console.log({
-      ...{ fullName },
-      ...{ email },
-      ...{ role },
-      ...{ studentCode },
-      class: schoolClass,
-      ...{ faculty },
-      ...{ schoolYear },
-      ...{ phone },
-      ...{ address },
-      ...{ dob },
-      ...{ position },
-      ...{ gender },
-      ...{ isActive },
-      ...{ bio },
-      ...{ avatar },
-      ...{ qrCode },
-      ...{ isFormer },
-    });
-     props.handleClose();
-    
-}
-// =============================================
-//==============================================
-//==============================================
-  
+  // =============================================
+  //==============================================
+  //==============================================
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
+    console.log(props.Editdatas)
   };
 
   const handleClose = () => {
@@ -148,58 +108,58 @@ export default function AddUserPage(props) {
   return (
     <div>
       {/* <Icon className="fa fa-plus-circle" color="primary" onClick={handleClickOpen}></Icon> */}
-      <Tooltip title="Add">
-        
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add
-      </Button>
-      </Tooltip>
-      <Dialog className = {classes.Dialog} fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <ValidatorForm onSubmit={handleSubmit}>
-        <AppBar className={classes.appBar}>
+     
+        <EditIcon onClick={handleClickOpen}/>
+        {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Add
+      </Button> */}
+      
+      <Dialog className={classes.Dialog} fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+        <ValidatorForm >
+          <AppBar className={classes.appBar}>
             <Toolbar className={classes.Toolbar}  >
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CloseIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Cancel
+              <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                Cancel
             </Typography>
-              <Button color="inherit" type='submit' >
-              save
+              <Button autoFocus color="inherit" onClick={handleClose}>
+                save
             </Button>
-          </Toolbar>
-        </AppBar>
+            </Toolbar>
+          </AppBar>
 
-        <div className="p-4" style={{ height: '100%', paddingTop: '50px' }}>
-          <Grid
-            container
-            spacing={12}
-            className="p-4"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={8}>
-              <Grid container justify="center" alignItems="center">
-                <Grid item xs={12}>
+          <div className="p-4" style={{ height: '100%', paddingTop: '50px' }}>
+            <Grid
+              container
+              spacing={12}
+              className="p-4"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid item xs={8}>
+                <Grid container justify="center" alignItems="center">
+                  <Grid item xs={6}>
                     <TextValidator
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      value = {fullName}
-                      onChange={e => setFullName(e.target.value)}
-                      
+                      value={props.Editdatas.fullName}
+                      // onChange={handChangeUserInfor('fullName')}
+
                       label="Tên thành viên"
                       margin="normal"
-                    /> 
-                </Grid>
+                    />
+                  </Grid>
                   <Grid item xs={6}>
                     <TextValidator
                       // style={{ width: '100%' }}
                       className={classes.textField}
                       fullWidth
-                      
+
                       label="Email"
                       variant="outlined"
                       validators={['required', 'isEmail']}
@@ -207,8 +167,7 @@ export default function AddUserPage(props) {
                         'Vui lòng nhập dữ liệu trường này',
                         'Email không hợp lệ',
                       ]}
-                      value = {email}
-                      onChange={e => setEmail(e.target.value)}
+                      value={props.Editdatas.email}
                       // onChange={handChangeUserInfor('email')}
                       // value={userInfor.email}
                       margin="normal"
@@ -223,9 +182,10 @@ export default function AddUserPage(props) {
                       label="Chức vụ"
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      onChange={e => setRole(e.target.value)}
-                      value = {role}
+                      // onChange={handChangeUserInfor('role')}
+                      // value={userInfor.role}
                       margin="normal"
+                      value={props.Editdatas.role}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -236,9 +196,10 @@ export default function AddUserPage(props) {
                       label="Mã Sinh Viên"
                       validators={['required', 'isNumber']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này', 'Vui lòng nhập dữ liệu là số']}
-                      onChange={e => setStudentCode(e.target.value)}
+                      // onChange={handChangeUserInfor('studentCode')}
+                      // value={userInfor.studentCode}
                       margin="normal"
-                      value={studentCode}
+                      value={props.Editdatas.studentCode}
                     />
                   </Grid>
 
@@ -250,9 +211,10 @@ export default function AddUserPage(props) {
                       label="Lớp"
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      onChange={e => setSchoolClass(e.target.value)}
+                      // onChange={handChangeUserInfor('class')}
+                      // value={userInfor.class}
                       margin="normal"
-                      value={schoolClass}
+                      value={props.Editdatas.class}
                     />
                   </Grid>
 
@@ -264,9 +226,9 @@ export default function AddUserPage(props) {
                       label="Khoa"
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      onChange={e => setFaculty(e.target.value)}
+
                       margin="normal"
-                      value = {faculty}
+                      value={props.Editdatas.faculty}
                     />
                   </Grid>
 
@@ -278,10 +240,11 @@ export default function AddUserPage(props) {
                       label="Niên khoá CLB"
                       validators={['required', 'isNumber']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này', 'Vui lòng nhập kí tự số']}
-                      onChange={e => setClubYear(e.target.value)}
+                      // onChange={handChangeUserInfor('clubYear')}
+                      // value={userInfor.clubYear}
                       margin="normal"
-                      value = {clubYear}
                     // type="Number"
+                      value={props.Editdatas.clubYear}
                     />
                   </Grid>
 
@@ -294,11 +257,12 @@ export default function AddUserPage(props) {
                       errorMessages={['Vui lòng nhập dữ liệu trường này',
                         'Vui lòng nhập kí tự số',
                       ]}
-                      onChange={e => setSchoolYear(e.target.value)}
+                      // onChange={handChangeUserInfor('schoolYear')}
+                      // value={userInfor.schoolYear}
                       label="Khóa"
                       margin="normal"
-                      value = {schoolYear}
                     // type="Number"
+                      value={props.Editdatas.schoolYear}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -314,11 +278,11 @@ export default function AddUserPage(props) {
                         'Yêu cầu nhập kí tự số',
                         'Số điện thoại với 10 kí tự số',
                         'Số điện thoại với 10 kí tự số',]}
-                      
+
                       label="Số điện thoại"
                       margin="normal"
-                      onChange={e => setPhone(e.target.value)}
-                      value={phone}
+                    // type="Number"
+                      value={props.Editdatas.phone}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -332,15 +296,15 @@ export default function AddUserPage(props) {
                       label="Ngày Sinh"
                       margin="normal"
                     /> */}
-                    
-                      <MaterialUIPickers
-                      onChangedate={value => setDob(value)}
-                      >
 
-                      </MaterialUIPickers>
+
+                    <MaterialUIPickers value = {props.Editdatas.dob}></MaterialUIPickers> 
+                    {/* Editdatas is a props from memberpage */}
+
+
                   </Grid>
 
-                  
+
                   <Grid item xs={6}>
                     <TextValidator
                       variant="outlined"
@@ -348,10 +312,10 @@ export default function AddUserPage(props) {
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      onChange={e => setAddress(e.target.value)}
+
                       label="Địa chỉ"
                       margin="normal"
-                      value = {address}
+                      value={props.Editdatas.address} //Editdatas is a props from memberpage
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -366,11 +330,11 @@ export default function AddUserPage(props) {
                       margin="normal"
                     /> */}
                     <div className={classes.textField} style={{ marginTop: '7px' }}>
-                    <NativeSelects ></NativeSelects>
+                      <NativeSelects value = {props.Editdatas.gender} ></NativeSelects>
                     </div>
                   </Grid>
-                  
-                  
+
+
 
                   <Grid item xs={6}>
                     <TextValidator
@@ -379,10 +343,10 @@ export default function AddUserPage(props) {
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
+
                       label="Vị trí"
                       margin="normal"
-                      onChange={e => setPosition(e.target.value)}
-                      value = {position}
+                      value = {props.Editdatas.position}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -392,27 +356,14 @@ export default function AddUserPage(props) {
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
+
                       label="Status"
                       margin="normal"
-                      onChange={e => setIsActive(e.target.value)}
-                      value = {isActive}
+                      value={props.Editdatas.isActive}
+                      
                     />
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <TextValidator
-                      variant="outlined"
-                      className={classes.textField}
-                      fullWidth
-                      validators={['required']}
-                      errorMessages={['Vui lòng nhập dữ liệu trường này']}
-
-                      label="Cựu"
-                      margin="normal"
-                      value={isFormer}
-                    />
-                  </Grid>
-                  
 
                   <Grid item xs={12}>
                     <TextValidator
@@ -421,11 +372,10 @@ export default function AddUserPage(props) {
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      
+
                       label="Giới thiệu ngắn "
                       margin="normal"
-                      onChange = {e => setBio(e.target.value)}
-                      value = {bio}
+                      value = {props.Editdatas.bio}
                     />
                   </Grid>
 
@@ -435,41 +385,21 @@ export default function AddUserPage(props) {
                     }
                     label="Secondary"
                   /> */}
-                  
 
-                  <Grid item xs={5}
-                  style = {{paddingTop: '50px'}}
-                    
-                  >
-                    <UploadImg 
-                      name ='Avatar'
-                      onChange={(value) => setAvatar(value)}
-                      
-                      
-                    />
-                      
-                  </Grid>
-                  <Grid item xs={2}
 
-                  >
-                    
-
-                  </Grid>
-                  
-                  <Grid item xs={5}
-                    style={{ paddingTop: '50px' }}>
-                    <UploadImg name='QR Code' onChange={(value) => setQrCode(value)}/>
                  
-                  </Grid>                                  
 
 
 
+
+
+
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
           </div>
-        </ValidatorForm> 
-        
+        </ValidatorForm>
+
       </Dialog>
     </div>
   );

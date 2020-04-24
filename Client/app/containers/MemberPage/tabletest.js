@@ -1,8 +1,4 @@
 import React from 'react';
-import{ useState, useEffect } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
-import Fab from '@material-ui/core/Fab';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
@@ -24,37 +20,28 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
-import EditIcon from '@material-ui/icons/Edit';
-import EditUser from '../EditUser'; // =============Edit
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectMemberPage from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import { getAllUserAction } from './actions';
-import AddUserPage from '../AddUserPage/index';
 
-// import  DialogMember from '../../components/DialogMember/index';
+function createData(name, calories, fat, carbs, protein,a) {
+  return { name, calories, fat, carbs, protein ,a};
+}
 
-import {
-  
-  TextField,
-} from '@material-ui/core';
+const rows = [
+  createData('Cupcake', 305, 3.7, 67, 4.3,30),
+  createData('Donut', 452, 25.0, 51, 4.9,30),
+  createData('Eclair', 262, 16.0, 24, 6.0,30),
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0,30),
+  createData('Gingerbread', 356, 16.0, 49, 3.9,30),
+  createData('Honeycomb', 408, 3.2, 87, 6.5,30),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3,30),
+  createData('Jelly Bean', 375, 0.0, 94, 0.0,30),
+  createData('KitKat', 518, 26.0, 65, 7.0,30),
+  createData('Lollipop', 392, 0.2, 98, 0.0,30),
+  createData('Marshmallow', 318, 0, 81, 2.0,30),
+  createData('Nougat', 360, 19.0, 9, 37.0,30),
+  createData('Oreo', 437, 18.0, 63, 4.0,30),
+];
 
-
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-
-
-function desc(a, b, orderBy) {
+function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -64,72 +51,66 @@ function desc(a, b, orderBy) {
   return 0;
 }
 
-function stableSort(array, cmp) {
+function getComparator(order, orderBy) {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
+
+function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
-    const order = cmp(a[0], b[0]);
+    const order = comparator(a[0], b[0]);
     if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map(el => el[0]);
-  
-}
-
-function getSorting(order, orderBy) {
-  return order === 'desc' ? (a, b) => desc(a, b, orderBy) : (a, b) => -desc(a, b, orderBy);
+  return stabilizedThis.map((el) => el[0]);
 }
 
 const headCells = [
-  { id: 'fullName', numeric: false, disablePadding: false, label: 'Full Name' },
-  { id: 'phone', numeric: true, disablePadding: false, label: 'Phone' },
-  { id: 'email', numeric: true, disablePadding: false, label: 'Email' },
-  { id: 'class', numeric: true, disablePadding: false, label: 'Class' },
-  { id: 'schoolYear', numeric: true, disablePadding: false, label: 'School Year' },
-  { id: 'isFormer', numeric: true, disablePadding: false, label: 'Status' },
+  { id: 'name', numeric: false, disablePadding: true, label: 'Dessert (100g serving)' },
+  { id: 'calories', numeric: true, disablePadding: false, label: 'Calories' },
+  { id: 'fat', numeric: true, disablePadding: false, label: 'Fat (g)' },
+  { id: 'carbs', numeric: true, disablePadding: false, label: 'Carbs (g)' },
+  { id: 'protein', numeric: true, disablePadding: false, label: 'Protein (g)' },
 ];
 
 function EnhancedTableHead(props) {
-  
   const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
-  const createSortHandler = property => event => {
+  const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
 
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox" >
+        <TableCell padding="checkbox">
           <Checkbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={numSelected === rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{ 'aria-label': 'select all desserts' }}
           />
         </TableCell>
-        {headCells.map(headCell => (
-          <TableCell 
-            key={headCell.phone}
+        {headCells.map((headCell) => (
+          <TableCell
+            key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'default'}
-            sortDirection={orderBy === headCell.Phone ? order : false}
+            sortDirection={orderBy === headCell.id ? order : false}
           >
-          
-            <TableSortLabel align="right"
+            <TableSortLabel
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              <b align="right">{headCell.label}</b>
-              
+              {headCell.label}
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
               ) : null}
-              
-
             </TableSortLabel>
-            {/* <TextField id="standard-basic" label="Search" /> */}
           </TableCell>
         ))}
       </TableRow>
@@ -147,7 +128,7 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
-const useToolbarStyles = makeStyles(theme => ({
+const useToolbarStyles = makeStyles((theme) => ({
   root: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(1),
@@ -165,18 +146,9 @@ const useToolbarStyles = makeStyles(theme => ({
   title: {
     flex: '1 1 100%',
   },
-  nameContainer: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  avatar: {
-    marginRight: theme.spacing(1)
-  },
 }));
 
-const EnhancedTableToolbar = props => {
-  const [open, setOpen] = useState(true);
-
+const EnhancedTableToolbar = (props) => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
 
@@ -187,13 +159,13 @@ const EnhancedTableToolbar = props => {
       })}
     >
       {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1">
+        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
           {numSelected} selected
         </Typography>
       ) : (
-          <Typography className={classes.title} variant="h6" id="tableTitle">
-        {/* HIT Users */}
-        </Typography>
+          <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+            Nutrition
+          </Typography>
         )}
 
       {numSelected > 0 ? (
@@ -203,23 +175,21 @@ const EnhancedTableToolbar = props => {
           </IconButton>
         </Tooltip>
       ) : (
-          <Tooltip title="Thêm Mới">
-            <AddUserPage ></AddUserPage>
-            
+          <Tooltip title="Filter list">
+            <IconButton aria-label="filter list">
+              <FilterListIcon />
+            </IconButton>
           </Tooltip>
         )}
-      
-      
     </Toolbar>
   );
 };
- 
 
 EnhancedTableToolbar.propTypes = {
   numSelected: PropTypes.number.isRequired,
 };
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
   },
@@ -241,25 +211,10 @@ const useStyles = makeStyles(theme => ({
     top: 20,
     width: 1,
   },
-  content: {
-    padding: 0
-  },
-  nameContainer: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  avatar: {
-    marginRight: theme.spacing(2)
-  },
 }));
 
-export  function MemberPage(props) {
-  const [open, setOpen] = useState(false);
-  const [editData, setEditData] = useState({});
-  const [isEdit, setEdit] = useState(false);
-  //==================================
-  //===================================
-   console.log(props.memberPage.users);
+export default function EnhancedTable() {
+  console.log(rows);
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -267,22 +222,6 @@ export  function MemberPage(props) {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  useInjectReducer({ key: 'memberPage', reducer });
-  useInjectSaga({ key: 'memberPage', saga });
-  const { memberPage } = props;
-  // console.log(memberPage.users);
-  // const rootClassName = classNames(classes.root, className, memberPage);
-
-  useEffect(() => {
-    props.onGetUsers({
-      filter: {
-        role: 'admin',
-      },
-    });
-    // console.log(memberPage)
-   
-  }, []);
-
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -290,9 +229,9 @@ export  function MemberPage(props) {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = event => {
+  const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = memberPage.users.map(n => n._id);
+      const newSelecteds = rows.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -304,7 +243,7 @@ export  function MemberPage(props) {
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected,name);
+      newSelected = newSelected.concat(selected, name);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -323,21 +262,20 @@ export  function MemberPage(props) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
-  const handleChangeDense = event => {
+  const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
 
-  const isSelected = name => selected.indexOf(name) !== -1;
+  const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, memberPage.users.length - page * rowsPerPage);
-  
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+
   return (
-    
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -349,34 +287,30 @@ export  function MemberPage(props) {
             aria-label="enhanced table"
           >
             <EnhancedTableHead
-              selectedId = {selected} //choose id to delete
               classes={classes}
               numSelected={selected.length}
               order={order}
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={memberPage.users.length}
+              rowCount={rows.length}
             />
-            
-           
             <TableBody>
               
-              {stableSort(memberPage.users, getSorting(order, orderBy))
+              {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row._id);
+                  const isItemSelected = isSelected(row.name);
                   const labelId = `enhanced-table-checkbox-${index}`;
-                  
 
                   return (
                     <TableRow
                       hover
-                      onClick={event => handleClick(event, row._id)}
+                      onClick={(event) => handleClick(event, row.name)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row._id}
+                      key={row.name}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
@@ -385,42 +319,13 @@ export  function MemberPage(props) {
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell>
-                        <div className={classes.nameContainer}>
-                          <Avatar
-                            className={classes.avatar}
-                            src={`http://localhost:5000/user/${row._id}/avatar/large`}
-                          >
-                           
-                          </Avatar>
-                          <Typography variant="body1">{row.fullName}</Typography>
-                        </div>
+                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                        {row.name}
                       </TableCell>
-                      <TableCell align = "right" >{row.phone}</TableCell>
-                      <TableCell align="right" >{row.email}</TableCell>
-                      <TableCell align="right" >{row.class}</TableCell>
-                      <TableCell align="right" >{row.schoolYear}</TableCell>
-                      <TableCell align="right" >{row.schoolYear}</TableCell>
-                      <TableCell align="right" > 
-                      <Tooltip title="Edit">
-                         
-                          <IconButton aria-label="Edit" 
-                            onClick={() => {
-                            setOpen(true);
-                            setEdit(true);
-                            setEditData(Object.assign({}, row));
-                          }}
-                          >                            
-                            <EditUser Editdatas={Object.assign({}, row)}/>
-                        </IconButton>
-                      </Tooltip></TableCell>
-                      
-                       
-                      
-                      {/* <TableCell align="right" ><Avatar alt="avatar" src={`http://localhost:5000/user/${row._id}/avatar/large`} />
-                      </TableCell> */}
-                      
-                      
+                      <TableCell align="right">{row.calories}</TableCell>
+                      <TableCell align="right">{row.fat}</TableCell>
+                      <TableCell align="right">{row.carbs}</TableCell>
+                      <TableCell align="right">{row.protein}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -435,7 +340,7 @@ export  function MemberPage(props) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={memberPage.users.length}
+          count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -449,27 +354,3 @@ export  function MemberPage(props) {
     </div>
   );
 }
-
-
-const mapStateToProps = createStructuredSelector({
-  memberPage: makeSelectMemberPage(),
-});
-
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-    onGetUsers: body => dispatch(getAllUserAction(body)),
- 
-  };
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  // withStyles(styles),
-  withConnect,
-)(MemberPage);
-

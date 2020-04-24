@@ -5,18 +5,37 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 // import { Card, CardHeader, CardBody, CardTitle } from "reactstrap"
 import { useDropzone } from "react-dropzone";
+import './test.css';
 
 
 
 function BasicDropzone(props) {
+
+
+
+  
+  
+  const { onChange} = props;
   const [files, setFiles] = useState([])
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: acceptedFiles => {
+      
+      // console.log(acceptedFiles);
+      // onChangess(acceptedFiles);
+      
+      
+      
+      
       setFiles(
+        
         acceptedFiles.map(file =>
+          
+          
           Object.assign(file, {
-            preview: URL.createObjectURL(file)
+            preview: URL.createObjectURL(file),
+            
           })
         )
       )
@@ -33,11 +52,20 @@ function BasicDropzone(props) {
 
   useEffect(
     () => () => {
+      
       // Make sure to revoke the data uris to avoid memory leaks
       files.forEach(file => URL.revokeObjectURL(file.preview))
     },
     [files]
   )
+  
+  useEffect(() => {
+    (files) => onChange(files)
+
+  }, []);
+
+
+  
 
   return (
     <section>
@@ -56,11 +84,11 @@ class UploadImg extends React.Component {
   render() {
     return (
       <Card>
-        <CardHeader>
-         Avatar
-        </CardHeader>
+        {/* <CardHeader>
+        Avatar
+        </CardHeader> */}
         <CardContent>
-          <BasicDropzone />
+          <BasicDropzone  />
         </CardContent>
       </Card>
     )

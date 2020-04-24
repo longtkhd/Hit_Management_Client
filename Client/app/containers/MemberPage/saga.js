@@ -1,7 +1,6 @@
 // MemberPage Saga
 
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
-import APICall from '../../APICall';
 import {USER} from '../../urlConfig';
 import * as types from './constants';
 import axios from 'axios';

@@ -24,7 +24,6 @@ const memberPageReducer = (state = initialState, action) =>
         draft.error = false;
         draft.success = false;
         break;
-
       case GET_USER_SUCCESS:
         // draft.userData.repositories = action.repos;
         draft.loading = false;
@@ -32,11 +31,7 @@ const memberPageReducer = (state = initialState, action) =>
         draft.error = false;
         draft.success = true;
         draft.users = action.data.users;
-        
-
-
         break;
-
       case GET_USER_FALSE:
         
         draft.loading = false;

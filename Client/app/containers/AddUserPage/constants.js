@@ -1,0 +1,2 @@
+export const CREATE_USER = 'app/CREATE_USER';
+export const CREATE_USER_SUCCESS = 'app/CREATE_USER_SUCCESS';

@@ -7,7 +7,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
-import Background from './emoji.png';
+import Background from '../../images/pages/register.jpg';
+import bg from '../../images/pages/login.jpg';
 const useStyles = makeStyles(theme => ({
   notFound: {
     maxWidth: "520px",
@@ -17,7 +18,10 @@ const useStyles = makeStyles(theme => ({
     position: "absolute",
     left: "50%",
     top: "50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
+   
+    
+    
   },
   h1Class: {
     fontFamily: "'Montserrat', sans-serif",
