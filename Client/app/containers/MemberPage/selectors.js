@@ -18,4 +18,4 @@ const makeSelectMemberPage = () =>
   );
 
 export default makeSelectMemberPage;
-export { selectMemberPageDomain };
+export { selectMemberPageDomain }; 

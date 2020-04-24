@@ -49,14 +49,7 @@ function ProgrammaticallyDropzone(props) {
     },
     [files]
   )
-  useEffect (()=> () => {
-   
-    console.log(files)
-
-    
-
-    
-  },[files])
+ 
 
   return (
     <section>

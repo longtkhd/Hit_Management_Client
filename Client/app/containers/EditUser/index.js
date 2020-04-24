@@ -21,6 +21,9 @@ import bg from '../../images/chat-bg-3.png';
 import MaterialUIPickers from '../../components/Crud//datePicker/datepicker';
 import NativeSelects from '../../components/Crud/select.js/index.js';
 import EditIcon from '@material-ui/icons/Edit';
+import RoleSelect from '../../components/Crud/select.js/roleselect';
+import RadioButtonsGroup from '../../components/Ratio';
+import GenderRatio from '../../components/Ratio/gender';
 
 // import Switch from '@material-ui/core/Switch';
 import {
@@ -29,6 +32,20 @@ import {
   Switch,
 } from '@material-ui/core';
 import UploadImg from '../../components/Crud/upload';
+
+//=================================================/////////////
+
+import { updateUserAction } from './actions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import makeSelectEditUser from './selectors';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import reducer from './reducer';
+import saga from './saga';
+import { createStructuredSelector } from 'reselect';
+//=========================================================//////////////
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -65,28 +82,78 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-export default function EditUser(props) {
+export  function EditUser(props) {
+
+  useInjectReducer({ key: 'editUserPage', reducer });
+  useInjectSaga({ key: 'editUserPage', saga });
   
 
   const [dob, setDob] = React.useState('');
 
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
-  const [studentCode, setStudentCode] = useState('');
-  const [schoolClass, setSchoolClass] = useState('');
-  const [faculty, setFaculty] = useState('');
-  const [schoolYear, setSchoolYear] = useState('');
-  const [clubYear, setClubYear] = useState('');
-  const [phone, setPhone] = useState('');
-  const [address, setAddress] = useState('');
-  const [position, setPosition] = useState('');
-  const [gender, setGender] = useState('');
-  const [isActive, setIsActive] = useState(true);
-  const [bio, setBio] = useState('');
+  const [fullName, setFullName] = useState(props.Editdatas.fullName);
+  const [email, setEmail] = useState(props.Editdatas.email);
+  const [role, setRole] = useState(props.Editdatas.role);
+  const [studentCode, setStudentCode] = useState(props.Editdatas.studentCode);
+  const [schoolClass, setSchoolClass] = useState(props.Editdatas.class);
+  const [faculty, setFaculty] = useState(props.Editdatas.faculty);
+  const [schoolYear, setSchoolYear] = useState(props.Editdatas.schoolYear);
+  const [clubYear, setClubYear] = useState(props.Editdatas.clubYear);
+  const [phone, setPhone] = useState(props.Editdatas.phone);
+  const [address, setAddress] = useState(props.Editdatas.address);
+  const [position, setPosition] = useState(props.Editdatas.position);
+  const [gender, setGender] = useState(props.Editdatas.gender);
+  const [isActive, setIsActive] = useState(props.Editdatas.isActive);
+  const [bio, setBio] = useState(props.Editdatas.bio);
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
-  const [isFormer, setIsFormer] = useState(false);
+  const [isFormer, setIsFormer] = useState(props.Editdatas.isFormer);
+
+
+  function handleSubmit() {
+    props.onCreateUser({
+      ...{ fullName },
+      ...{ email },
+      ...{ role },
+      ...{ studentCode },
+      class: schoolClass,
+      ...{ clubYear },
+      ...{ faculty },
+      ...{ schoolYear },
+      ...{ phone },
+      ...{ address },
+      ...{ dob },
+      ...{ position },
+      ...{ gender },
+      ...{ isActive },
+      ...{ bio },
+      ...{ avatar },
+      ...{ qrCode },
+      ...{ isFormer },
+    });
+   
+
+    console.log({
+      ...{ fullName },
+      ...{ email },
+      ...{ role },
+      ...{ studentCode },
+      class: schoolClass,
+      ...{ faculty },
+      ...{ schoolYear },
+      ...{ phone },
+      ...{ address },
+      ...{ dob },
+      ...{ position },
+      ...{ gender },
+      ...{ isActive },
+      ...{ bio },
+      ...{ avatar },
+      ...{ qrCode },
+      ...{ isFormer },
+    });
+
+
+  }
 
 
   // =============================================
@@ -147,8 +214,8 @@ export default function EditUser(props) {
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      value={props.Editdatas.fullName}
-                      // onChange={handChangeUserInfor('fullName')}
+                      value={fullName}
+                      onChange={e => setFullName(e.target.value)}
 
                       label="Tên thành viên"
                       margin="normal"
@@ -167,7 +234,8 @@ export default function EditUser(props) {
                         'Vui lòng nhập dữ liệu trường này',
                         'Email không hợp lệ',
                       ]}
-                      value={props.Editdatas.email}
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
                       // onChange={handChangeUserInfor('email')}
                       // value={userInfor.email}
                       margin="normal"
@@ -175,7 +243,7 @@ export default function EditUser(props) {
                   </Grid>
 
                   <Grid item xs={6}>
-                    <TextValidator
+                    {/* <TextValidator
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
@@ -186,7 +254,11 @@ export default function EditUser(props) {
                       // value={userInfor.role}
                       margin="normal"
                       value={props.Editdatas.role}
-                    />
+                      
+                    /> */}
+                    <div className={classes.textField} style={{ marginTop: '7px' }}>
+                      <RoleSelect ></RoleSelect>
+                    </div>
                   </Grid>
                   <Grid item xs={6}>
                     <TextValidator
@@ -199,7 +271,8 @@ export default function EditUser(props) {
                       // onChange={handChangeUserInfor('studentCode')}
                       // value={userInfor.studentCode}
                       margin="normal"
-                      value={props.Editdatas.studentCode}
+                      value={studentCode}
+                      onChange={e => setStudentCode(e.target.value)}
                     />
                   </Grid>
 
@@ -214,7 +287,8 @@ export default function EditUser(props) {
                       // onChange={handChangeUserInfor('class')}
                       // value={userInfor.class}
                       margin="normal"
-                      value={props.Editdatas.class}
+                      value={schoolClass}
+                      onChange={e => setSchoolClass(e.target.value)}
                     />
                   </Grid>
 
@@ -228,7 +302,8 @@ export default function EditUser(props) {
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
 
                       margin="normal"
-                      value={props.Editdatas.faculty}
+                      value={faculty}
+                      onChange={e => setFaculty(e.target.value)}
                     />
                   </Grid>
 
@@ -244,7 +319,8 @@ export default function EditUser(props) {
                       // value={userInfor.clubYear}
                       margin="normal"
                     // type="Number"
-                      value={props.Editdatas.clubYear}
+                      value={clubYear}
+                      onChange={e => setClubYear(e.target.value)}
                     />
                   </Grid>
 
@@ -262,7 +338,8 @@ export default function EditUser(props) {
                       label="Khóa"
                       margin="normal"
                     // type="Number"
-                      value={props.Editdatas.schoolYear}
+                      value={schoolYear}
+                      onChange={e => setSchoolYear(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -282,7 +359,8 @@ export default function EditUser(props) {
                       label="Số điện thoại"
                       margin="normal"
                     // type="Number"
-                      value={props.Editdatas.phone}
+                      value={phone}
+                      onChange={e => setPhone(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={6}>
@@ -315,24 +393,11 @@ export default function EditUser(props) {
 
                       label="Địa chỉ"
                       margin="normal"
-                      value={props.Editdatas.address} //Editdatas is a props from memberpage
+                      value={address} //Editdatas is a props from memberpage
+                      onChange={e => setAddress(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={6}>
-                    {/* <TextValidator
-                      variant="outlined"
-                      className={classes.textField}
-                      fullWidth
-                      validators={['required']}
-                      errorMessages={['Vui lòng nhập dữ liệu trường này']}
-
-                      label="Giới tính"
-                      margin="normal"
-                    /> */}
-                    <div className={classes.textField} style={{ marginTop: '7px' }}>
-                      <NativeSelects value = {props.Editdatas.gender} ></NativeSelects>
-                    </div>
-                  </Grid>
+                  
 
 
 
@@ -346,23 +411,56 @@ export default function EditUser(props) {
 
                       label="Vị trí"
                       margin="normal"
-                      value = {props.Editdatas.position}
+                      value = {position}
+                      onChange={e => setPosition(e.target.value)}
                     />
                   </Grid>
-                  <Grid item xs={6}>
-                    <TextValidator
+
+                  <Grid item xs={4}>
+                    {/* <TextValidator
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
 
-                      label="Status"
+                      label="Giới tính"
                       margin="normal"
-                      value={props.Editdatas.isActive}
-                      
+                    /> */}
+                    <div className={classes.textField} >
+                      <GenderRatio isRadio = {props.Editdatas.gender} />
+                      {/* <NativeSelects onSelect = {value => setGender(value)}></NativeSelects> */}
+                    </div>
+                  </Grid>
+                  <Grid item xs={4}>
+                    {/* <TextValidator
+                      variant="outlined"
+                      className={classes.textField}
+                      fullWidth
+                      validators={['required']}
+                      errorMessages={['Vui lòng nhập dữ liệu trường này']}
+                      label="IsActive"
+                      margin="normal"
+                      onChange={e => setIsActive(e.target.value)}
+                      value = {isActive}
+                    /> */}
+                    <RadioButtonsGroup isActive = {props.Editdatas.isActive} />
+                  </Grid>
+                  <Grid item xs = {4}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          
+                          onChange={e => setIsFormer(e.target.checked)}
+                          value={props.Editdatas.isFormer}
+
+                        />
+                      }
+                      label="Trạng thái (Cựu)"
                     />
                   </Grid>
+
+                  
 
 
                   <Grid item xs={12}>
@@ -375,7 +473,7 @@ export default function EditUser(props) {
 
                       label="Giới thiệu ngắn "
                       margin="normal"
-                      value = {props.Editdatas.bio}
+                      value = {bio}
                     />
                   </Grid>
 
@@ -404,3 +502,30 @@ export default function EditUser(props) {
     </div>
   );
 }
+
+EditUser.propTypes = {
+  classes: PropTypes.object,
+};
+const mapStateToProps = createStructuredSelector({
+  editUser: makeSelectEditUser(),
+});
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+    // onGetUsers: query => dispatch(getUsers(query)),
+    onUpdateUser: data => dispatch(updateUserAction(data)),
+
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  // withStyles(styles),
+  withConnect,
+)(EditUser);

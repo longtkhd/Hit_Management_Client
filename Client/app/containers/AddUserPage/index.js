@@ -22,9 +22,11 @@ import MaterialUIPickers from '../../components/Crud/datePicker/datepicker';
 import NativeSelects from '../../components/Crud/select.js/index.js';
 import RoleSelect from '../../components/Crud/select.js/roleselect';
 import RadioButtonsGroup from '../../components/Ratio';
-import { createUserAction} from './actions';
+import GenderRatio from '../../components/Ratio/gender';
+
 
 //=====================================
+import { createUserAction } from './actions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -123,6 +125,7 @@ export function AddUserPage(props) {
       ...{ qrCode },
       ...{ isFormer },
     });
+    clearData();
 
     console.log({
       ...{ fullName },
@@ -144,7 +147,26 @@ export function AddUserPage(props) {
       ...{ isFormer },
     });
     
- 
+    function clearData() {
+      setFullName('');
+      setPhone('');
+      setStudentCode('');
+      setAddress('');
+      setDob('2000/09/27');
+      setPosition('');
+      setSchoolClass('');
+      setEmail('');
+      setGender('');
+      setFaculty('');
+      setIsActive('');
+      setRole('');
+      setBio('');
+      setAvatar('');
+      setQrCode('');
+      setIsFormer(false);
+      setSchoolYear('');
+      setClubYear('');
+    }
     
 }
 // =============================================
@@ -198,7 +220,7 @@ export function AddUserPage(props) {
           >
             <Grid item xs={8}>
               <Grid container justify="center" alignItems="center">
-                <Grid item xs={12}>
+                <Grid item xs={6}>
                     <TextValidator
                       variant="outlined"
                       className={classes.textField}
@@ -376,6 +398,19 @@ export function AddUserPage(props) {
                     />
                   </Grid>
                   <Grid item xs={6}>
+                    <TextValidator
+                      variant="outlined"
+                      className={classes.textField}
+                      fullWidth
+                      validators={['required']}
+                      errorMessages={['Vui lòng nhập dữ liệu trường này']}
+                      label="Vị trí"
+                      margin="normal"
+                      onChange={e => setPosition(e.target.value)}
+                      value={position}
+                    />
+                  </Grid>
+                  <Grid item xs={4}>
                     {/* <TextValidator
                       variant="outlined"
                       className={classes.textField}
@@ -386,27 +421,12 @@ export function AddUserPage(props) {
                       label="Giới tính"
                       margin="normal"
                     /> */}
-                    <div className={classes.textField} style={{ marginTop: '7px' }}>
-                    <NativeSelects onSelect = {value => setGender(value)}></NativeSelects>
+                    <div className={classes.textField} >
+                      <GenderRatio onRadio={value => setGender(value)} isRadio={null}/>
+                    {/* <NativeSelects onSelect = {value => setGender(value)}></NativeSelects> */}
                     </div>
                   </Grid>
-                  
-                  
-
-                  <Grid item xs={6}>
-                    <TextValidator
-                      variant="outlined"
-                      className={classes.textField}
-                      fullWidth
-                      validators={['required']}
-                      errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      label="Vị trí"
-                      margin="normal"
-                      onChange={e => setPosition(e.target.value)}
-                      value = {position}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={4}>
                     {/* <TextValidator
                       variant="outlined"
                       className={classes.textField}
@@ -418,22 +438,28 @@ export function AddUserPage(props) {
                       onChange={e => setIsActive(e.target.value)}
                       value = {isActive}
                     /> */}
-                    <RadioButtonsGroup onRatio = {value => setIsActive(value)}/>
+                    <RadioButtonsGroup onRatio={value => setIsActive(value)} isActive = {true} />
                   </Grid>
+                  
+                  
 
-                  <Grid item xs={6}>
-                    <TextValidator
-                      variant="outlined"
-                      className={classes.textField}
-                      fullWidth
-                      validators={['required']}
-                      errorMessages={['Vui lòng nhập dữ liệu trường này']}
+                 
+                  <Grid item xs={4}>
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          defaultChecked={isFormer}
+                          onChange={e => setIsFormer(e.target.checked)}
+                          value={isFormer}
 
-                      label="Cựu"
-                      margin="normal"
-                      value={isFormer}
+                        />
+                      }
+                      label="Trạng thái (Cựu)"
                     />
                   </Grid>
+                  
+
+                  
                   
 
                   <Grid item xs={12}>
