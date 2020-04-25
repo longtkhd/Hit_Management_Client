@@ -31,7 +31,7 @@ export default function MaterialUIPickers(props) {
   
   
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState( props.value || new Date('2000/09/27') );
+  const [selectedDate, setSelectedDate] = React.useState(props.initDate );
 
   function formatDate(date) {
     var d = new Date(date),

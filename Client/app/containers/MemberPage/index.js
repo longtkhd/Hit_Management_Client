@@ -234,7 +234,7 @@ const EnhancedTableToolbar = props => {
         
       ) : (
           <Tooltip title="Thêm Mới">
-            <AddUserPage isEditcheck = {false}></AddUserPage>
+            <AddUserPage isEditcheck={false} ></AddUserPage>
             
           </Tooltip>
         )}
@@ -455,7 +455,7 @@ export  function MemberPage(props) {
                             setEditData(Object.assign({}, row));
                           }}
                           > 
-                          < AddUserPage isEditcheck = {true}/>                         
+                            < AddUserPage isEditcheck={true} Editdatas={ row} />                         
                             {/* <EditUser Editdatas={Object.assign({}, row)}/> */}
                         </IconButton>
 

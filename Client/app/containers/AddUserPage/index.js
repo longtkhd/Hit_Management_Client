@@ -88,7 +88,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export function AddUserPage(props) {
   
 
-  console.log(props.isEditcheck)
+  // console.log(props.isEditcheck);
+  // if(props.isEditcheck){
+  //   console.log(props.Editdatas)
+  // }
+  
   const [dob, setDob] = React.useState('2000/09/27');
  
   const [fullName, setFullName] = useState('');
@@ -106,8 +110,52 @@ export function AddUserPage(props) {
   const [bio, setBio] = useState('');
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
-  const [isFormer, setIsFormer] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [isFormer, setIsFormer] = useState('');
+  const [isActive, setIsActive] = useState('');
+
+  useEffect(() => {
+
+    if (props.isEditcheck && props.Editdatas) {
+      setFullName(props.Editdatas.fullName);
+      setEmail(props.Editdatas.email);
+      setRole(props.Editdatas.role);
+      setStudentCode(props.Editdatas.studentCode);
+      setSchoolClass(props.Editdatas.class);
+      setFaculty(props.Editdatas.faculty);
+      setSchoolYear(props.Editdatas.schoolYear);
+      setClubYear(props.Editdatas.clubYear);
+      setPhone(props.Editdatas.phone);
+      setAddress(props.Editdatas.address);
+      setDob(props.Editdatas.dob);
+      setPosition(props.Editdatas.position);
+      setGender(props.Editdatas.gender);
+      setIsActive(props.Editdatas.isActive);
+      setBio(props.Editdatas.bio);
+      setAvatar(props.Editdatas.avatar);
+      setQrCode(props.Editdatas.qrCode);
+      setIsFormer(props.Editdatas.isFormer);
+    } else {
+      setDob(new Date('2000/09/27'));
+      setIsActive(true);
+      setIsFormer(false);
+      setFullName("");
+      setEmail("");
+      setRole();
+      setStudentCode("");
+      setSchoolClass("");
+      setFaculty("");
+      setSchoolYear("");
+      setClubYear("");
+      setPhone("");
+      setAddress("");
+      setPosition("");
+      setGender("");
+      setBio("");
+      setAvatar("");
+      setQrCode("");
+
+    }
+  }, [props.Editdatas]);
 
   function handleSubmit() {
     props.onCreateUser({
@@ -385,6 +433,7 @@ export function AddUserPage(props) {
                     
                       <MaterialUIPickers
                       onChangedate={value => setDob(value)}
+                      initDate = {dob}
                       >
 
                       </MaterialUIPickers>
@@ -429,7 +478,7 @@ export function AddUserPage(props) {
                       margin="normal"
                     /> */}
                     <div className={classes.textField} >
-                      <GenderRatio onRadio={value => setGender(value)} isRadio={null}/>
+                      <GenderRatio onRadio={value => setGender(value)}  gender = {gender} />
                     {/* <NativeSelects onSelect = {value => setGender(value)}></NativeSelects> */}
                     </div>
                   </Grid>
@@ -445,7 +494,7 @@ export function AddUserPage(props) {
                       onChange={e => setIsActive(e.target.value)}
                       value = {isActive}
                     /> */}
-                    <RadioButtonsGroup onRatio={value => setIsActive(value)} isActive = {true} />
+                    <RadioButtonsGroup onRatio={value => setIsActive(value)} isActive = {isActive} />
                   </Grid>
                   
                   

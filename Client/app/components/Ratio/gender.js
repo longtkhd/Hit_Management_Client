@@ -21,8 +21,8 @@ import { withStyles } from '@material-ui/core/styles';
 export default function GenderRatio(props) {
   const { onRadio } = props;
   const { isRadio} = props; //set value when edit (with adduser = '')
-  console.log(isRadio);
-  const [value, setValue] = React.useState( isRadio );
+  // console.log(isRadio);
+  const [value, setValue] = React.useState(props.gender );
 
   const handleChange = (event) => {
     setValue(event.target.value);

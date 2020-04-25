@@ -35,7 +35,7 @@ export default function RadioButtonsGroup(props) {
   
   const { isActive} = props;
 
-  console.log(Boolean(isActive));
+  // console.log(Boolean(isActive));
   const [value, setValue] = React.useState(isActive ? '1' : '0');
   
 
