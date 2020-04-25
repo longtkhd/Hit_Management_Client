@@ -6,6 +6,8 @@
     GET_USER,
     GET_USER_SUCCESS,
     GET_USER_FALSE,
+    DELETE_USER,
+    DELETE_USER_SUCCESS,
   } from './constants';
 
   export const initialState = {
@@ -33,9 +35,21 @@ const memberPageReducer = (state = initialState, action) =>
         draft.users = action.data.users;
         break;
       case GET_USER_FALSE:
-        
         draft.loading = false;
         draft.success = false;
+        draft.error = false;
+        break;
+
+      case DELETE_USER:
+        draft.loading = true;
+        draft.success = false;
+        draft.error = false;
+        break ;
+
+
+      case DELETE_USER_SUCCESS:
+        draft.loading = true;
+        draft.success = true;
         draft.error = false;
         break;
     }

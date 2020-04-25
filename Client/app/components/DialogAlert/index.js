@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
+import DeleteIcon from '@material-ui/icons/Delete'
 import {
   DialogActions,
   DialogContent,
@@ -34,20 +35,14 @@ function DialogAlert(props) {
   }
 
   function onDelete() {
+    console.log(props.value);
     props.onAccept(props.value);
     setOpen(false);
   }
   return (
     <div>
-      <Fab
-        color="secondary"
-        className={`${props.color} mx-1`}
-        aria-label="add"
-        size="small"
-        onClick={handleClickOpen}
-      >
-        {props.icon}
-      </Fab>
+      <DeleteIcon onClick={handleClickOpen}/>
+      
       <Dialog
         open={open}
         onClose={handleClose}

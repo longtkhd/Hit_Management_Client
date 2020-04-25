@@ -9,6 +9,8 @@ const GlobalStyle = createGlobalStyle`
     width: 100% ;
     line-height: 1.5;
      background-image : url("./images/pages/login.jpg") !important;
+     font-size:15px !important;
+     font-family: 'Nunito Sans', sans-serif !important;
   }
   
   
@@ -57,11 +59,11 @@ const GlobalStyle = createGlobalStyle`
 }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   #app {

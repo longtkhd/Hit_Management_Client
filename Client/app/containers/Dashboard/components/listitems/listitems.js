@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
+import './list.css'
 
 export function MainListItems() {
 

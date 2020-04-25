@@ -25,6 +25,11 @@ import reducer from './reducer';
 import saga from './saga';
 import { login, logOut } from './actions';
 import bg from '../../images/pages/login.jpg'
+// import logo from '../../images/logos/LogoHIT.png'
+import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
+
+
+import logo from '../../images/logos/LogoHIT.png';
 
 function Copyright() {
   return (
@@ -104,8 +109,9 @@ export function SignIn(props) {
   return (
     
     
-    <Container component="main" maxWidth="xs" >
     
+    <Container component="main" maxWidth="xs" >
+      
       
       
       <CssBaseline className={classes.Container}/>
@@ -115,9 +121,20 @@ export function SignIn(props) {
         
         
         <ValidatorForm onSubmit={handleSubmit} />
-        <Typography component="h1" variant="h5">
-          Login
-        </Typography>
+        
+        
+
+        <Link className={classes.logoLink} to="/">
+        <img align="center"
+          className={classes.logoImage}
+          // src="/images/logos/brainalytica_logo.svg"
+          alt="anh"
+          src={logo}
+          style={{ width: "80px" ,marginRight:'10px'}}
+        />
+          <FavoriteTwoToneIcon color='secondary' align="center"/>
+      </Link>
+       
          
         <form className={classes.form} noValidate>
           <TextField

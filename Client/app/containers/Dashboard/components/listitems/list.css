@@ -1,5 +1,10 @@
 .active {
     background: #fbfb09;
     font-weight: 600;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
+}
+
+* {
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 500;
 }

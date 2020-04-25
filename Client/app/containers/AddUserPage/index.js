@@ -1,6 +1,7 @@
 import React , {useState,useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import EditIcon from '@material-ui/icons/Edit';
 
 import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -65,9 +66,11 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     width: "97%",
    
+    
+   
   },
   Dialog:{
-    marginLeft: 255,
+    marginLeft: '50%',
     backgroundColor: '#f8fafc',
     // backgroundImage: `url(${bg})`
   },
@@ -83,12 +86,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export function AddUserPage(props) {
+  
 
+  console.log(props.isEditcheck)
   const [dob, setDob] = React.useState('2000/09/27');
  
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('');
+  const [role, setRole] = useState('5dedee326d15ff3f4593013f');
   const [studentCode, setStudentCode] = useState('');
   const [schoolClass, setSchoolClass] = useState('');
   const [faculty, setFaculty] = useState('');
@@ -188,12 +193,14 @@ export function AddUserPage(props) {
   return (
     <div>
       {/* <Icon className="fa fa-plus-circle" color="primary" onClick={handleClickOpen}></Icon> */}
-      <Tooltip title="Add">
-        
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+      
+      
+    
+     {props.isEditcheck ? <EditIcon onClick={handleClickOpen} />:<Tooltip title="Add"><Button variant="outlined" color="primary" onClick={handleClickOpen}>
         Add
       </Button>
       </Tooltip>
+}
       <Dialog className = {classes.Dialog} fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <ValidatorForm onSubmit={handleSubmit}>
         <AppBar className={classes.appBar}>
@@ -210,15 +217,15 @@ export function AddUserPage(props) {
           </Toolbar>
         </AppBar>
 
-        <div className="p-4" style={{ height: '100%', paddingTop: '50px' }}>
+        <div className="p-2" style={{ height: '100%', paddingTop: '50px' ,width : '100%'}}>
           <Grid
             container
             spacing={12}
-            className="p-4"
+            className="p-2"
             justify="center"
             alignItems="center"
           >
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <Grid container justify="center" alignItems="center">
                 <Grid item xs={6}>
                     <TextValidator
@@ -462,14 +469,14 @@ export function AddUserPage(props) {
                   
                   
 
-                  <Grid item xs={12}>
+                  <Grid item xs={12} >
                     <TextValidator
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                      
+                    //  className = 'p-4'
                       label="Giới thiệu ngắn "
                       margin="normal"
                       onChange = {e => setBio(e.target.value)}
@@ -498,7 +505,6 @@ export function AddUserPage(props) {
                       
                   </Grid>
                   <Grid item xs={2}
-
                   >
                     
 
@@ -507,10 +513,7 @@ export function AddUserPage(props) {
                   <Grid item xs={5}
                     style={{ paddingTop: '50px' }}>
                     <UploadImg name='QR Code' onFiles={(value) => setQrCode(value)}/>                 
-                  </Grid>                                  
-
-
-
+                  </Grid>                                 
               </Grid>
             </Grid>
           </Grid>

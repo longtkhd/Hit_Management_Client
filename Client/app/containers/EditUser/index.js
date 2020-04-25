@@ -110,7 +110,7 @@ export  function EditUser(props) {
 
 
   function handleSubmit() {
-    props.onCreateUser({
+    props.onUpdateUser({
       ...{ fullName },
       ...{ email },
       ...{ role },
@@ -182,7 +182,7 @@ export  function EditUser(props) {
       </Button> */}
       
       <Dialog className={classes.Dialog} fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
-        <ValidatorForm >
+        <ValidatorForm onSubmit={handleSubmit} >
           <AppBar className={classes.appBar}>
             <Toolbar className={classes.Toolbar}  >
               <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -191,7 +191,7 @@ export  function EditUser(props) {
               <Typography variant="h6" className={classes.title}>
                 Cancel
             </Typography>
-              <Button autoFocus color="inherit" onClick={handleClose}>
+              <Button autoFocus color="inherit" onClick={handleClose} type ='submit'>
                 save
             </Button>
             </Toolbar>

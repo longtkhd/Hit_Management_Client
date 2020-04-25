@@ -36,8 +36,11 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectMemberPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getAllUserAction } from './actions';
+import { getAllUserAction ,deleteUsers} from './actions';
 import AddUserPage from '../AddUserPage/index';
+import DialogAlert from '../../components/DialogAlert';
+import {BASE_URL} from '../../urlConfig'
+// import { Delete} from '@material-ui/icons'
 
 // import  DialogMember from '../../components/DialogMember/index';
 
@@ -89,6 +92,8 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
+ 
+  
   
   const { classes, onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } = props;
   const createSortHandler = property => event => {
@@ -174,11 +179,23 @@ const useToolbarStyles = makeStyles(theme => ({
   },
 }));
 
+
 const EnhancedTableToolbar = props => {
+ 
+  console.log('test click')
   const [open, setOpen] = useState(true);
 
   const classes = useToolbarStyles();
   const { numSelected } = props;
+  const { selectedId} = props;
+  // console.log(props.selectedId)
+ 
+  const handDeletess = value => { 
+    console.log(props.propsfake);
+    console.log({ id: value });
+    props.propsfake.onDeleteUsers({ id: value });
+  };
+  
 
   return (
     <Toolbar
@@ -198,13 +215,26 @@ const EnhancedTableToolbar = props => {
 
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
+          
+            
+          <DialogAlert
+            // icon={<DeleteIcon />}
+            // style={{ marginBottom: '50px' }}
+            value={selectedId[0]}
+            onAccept={() => {
+              handDeletess(selectedId[0]);
+            }}
+
+
+            message="
+                          Bạn có muốn xoá thành viên này"
+          />
+          
         </Tooltip>
+        
       ) : (
           <Tooltip title="Thêm Mới">
-            <AddUserPage ></AddUserPage>
+            <AddUserPage isEditcheck = {false}></AddUserPage>
             
           </Tooltip>
         )}
@@ -253,23 +283,35 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 export  function MemberPage(props) {
+
+  // const handDelete = value => {
+  //   props.onDeleteUsers({ id: value });
+  //   console.log({ id: value });
+  //   console.log(props);
+  // }; if u want to delete near edit
+
+ 
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState({});
   const [isEdit, setEdit] = useState(false);
   //==================================
   //===================================
-   console.log(props.memberPage.users);
+  //  console.log(props.memberPage.users);
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
+  
+  
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   useInjectReducer({ key: 'memberPage', reducer });
   useInjectSaga({ key: 'memberPage', saga });
   const { memberPage } = props;
+ 
   // console.log(memberPage.users);
   // const rootClassName = classNames(classes.root, className, memberPage);
 
@@ -282,6 +324,8 @@ export  function MemberPage(props) {
     // console.log(memberPage)
    
   }, []);
+
+ 
 
 
   const handleRequestSort = (event, property) => {
@@ -340,7 +384,7 @@ export  function MemberPage(props) {
     
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
+        <EnhancedTableToolbar numSelected={selected.length} selectedId={selected} propsfake = {props} />
         <TableContainer>
           <Table
             className={classes.table}
@@ -349,7 +393,7 @@ export  function MemberPage(props) {
             aria-label="enhanced table"
           >
             <EnhancedTableHead
-              selectedId = {selected} //choose id to delete
+              // selectedId = {selected} //choose id to delete
               classes={classes}
               numSelected={selected.length}
               order={order}
@@ -389,7 +433,7 @@ export  function MemberPage(props) {
                         <div className={classes.nameContainer}>
                           <Avatar
                             className={classes.avatar}
-                            src={`http://localhost:5000/user/${row._id}/avatar/large`}
+                            src={`${BASE_URL}/user/${row._id}/avatar/large`}
                           >
                            
                           </Avatar>
@@ -410,14 +454,34 @@ export  function MemberPage(props) {
                             setEdit(true);
                             setEditData(Object.assign({}, row));
                           }}
-                          >                            
-                            <EditUser Editdatas={Object.assign({}, row)}/>
+                          > 
+                          < AddUserPage isEditcheck = {true}/>                         
+                            {/* <EditUser Editdatas={Object.assign({}, row)}/> */}
                         </IconButton>
-                      </Tooltip></TableCell>
+
+                         
+
+                      </Tooltip>
+                      
+                        
+                        </TableCell>
                       
                        
                       
-                      {/* <TableCell align="right" ><Avatar alt="avatar" src={`http://localhost:5000/user/${row._id}/avatar/large`} />
+                      {/* <TableCell align="left" > */}
+                       
+                        {/* <DialogAlert
+                          // icon={<DeleteIcon />}
+                          // style={{ marginBottom: '50px' }}
+                          value={row._id}
+                          onAccept={() => {
+                            handDelete(row._id);
+                          }}
+
+                          
+                          message="
+                          Bạn có muốn xoá thành viên này"
+                        />
                       </TableCell> */}
                       
                       
@@ -458,7 +522,9 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    onDeleteUsers: user => dispatch(deleteUsers(user)),
     onGetUsers: body => dispatch(getAllUserAction(body)),
+    
  
   };
 }
