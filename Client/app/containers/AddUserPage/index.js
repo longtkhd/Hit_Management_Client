@@ -97,7 +97,7 @@ export function AddUserPage(props) {
  
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
-  const [role, setRole] = useState('5dedee326d15ff3f4593013f');
+  const [role, setRole] = useState('');
   const [studentCode, setStudentCode] = useState('');
   const [schoolClass, setSchoolClass] = useState('');
   const [faculty, setFaculty] = useState('');
@@ -110,8 +110,8 @@ export function AddUserPage(props) {
   const [bio, setBio] = useState('');
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
-  const [isFormer, setIsFormer] = useState('');
-  const [isActive, setIsActive] = useState('');
+  const [isFormer, setIsFormer] = useState(false);
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
 
@@ -140,7 +140,7 @@ export function AddUserPage(props) {
       setIsFormer(false);
       setFullName("");
       setEmail("");
-      setRole();
+      setRole('');
       setStudentCode("");
       setSchoolClass("");
       setFaculty("");
@@ -179,6 +179,7 @@ export function AddUserPage(props) {
       ...{ isFormer },
     });
     clearData();
+    handleClose();
 
     console.log({
       ...{ fullName },
@@ -211,7 +212,7 @@ export function AddUserPage(props) {
       setEmail('');
       setGender('');
       setFaculty('');
-      setIsActive('');
+      setIsActive(true);
       setRole('');
       setBio('');
       setAvatar('');
@@ -259,7 +260,7 @@ export function AddUserPage(props) {
             <Typography variant="h6" className={classes.title}>
               Cancel
             </Typography>
-              <Button color="inherit" type='submit' onClick={handleClose} >
+              <Button color="inherit" type='submit'  >
               save
             </Button>
           </Toolbar>
@@ -323,7 +324,7 @@ export function AddUserPage(props) {
                       margin="normal"
                     /> */}
                     <div className={classes.textField} style={{ marginTop: '7px' }}>
-                      <RoleSelect onSelect={value => setRole(value)}></RoleSelect>
+                      <RoleSelect onSelect={value => setRole(value)} role = {role}></RoleSelect>
                     </div>
                   </Grid>
                   <Grid item xs={6}>

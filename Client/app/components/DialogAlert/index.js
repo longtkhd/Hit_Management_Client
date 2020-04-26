@@ -25,6 +25,9 @@ function PaperComponent(props) {
   );
 }
 function DialogAlert(props) {
+  // console.log( props.numSelected)
+
+
   const [open, setOpen] = useState(false);
   function handleClickOpen() {
     setOpen(true);
@@ -35,8 +38,16 @@ function DialogAlert(props) {
   }
 
   function onDelete() {
-    console.log(props.value);
+    // console.log('props.value' + ' ' +props.value);
+    
     props.onAccept(props.value);
+    // props.history.push('/user');
+    // parseInt(props.numSelected);
+  
+    props.onResetSelected()
+
+
+    // props.numSelected = 0;
     setOpen(false);
   }
   return (

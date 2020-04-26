@@ -3,6 +3,7 @@ import { USER } from '../../urlConfig';
 import * as types from './constants';
 import axios from 'axios';
 import { createUserAction, createUserSuccessAction} from './actions';
+import * as typesGetuser from '../MemberPage/constants';
 
 export function* createUser(action) {
 
@@ -42,10 +43,11 @@ export function* createUser(action) {
 
     if (createdUser) {
       console.log('creat user success');
-      yield put(createUserSuccessAction());
       yield put({
-        type: types.GET_USER,
+        type: typesGetuser.GET_USER,
       });
+      yield put(createUserSuccessAction());
+      
     } else {
       // yield put(getUsersError({}));
     }

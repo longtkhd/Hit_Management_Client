@@ -188,13 +188,13 @@ const EnhancedTableToolbar = props => {
   const classes = useToolbarStyles();
   const { numSelected } = props;
   const { selectedId} = props;
-  // console.log(props.selectedId)
- 
+  
   const handDeletess = value => { 
-    console.log(props.propsfake);
-    console.log({ id: value });
+    // console.log(props.propsfake);
+    // console.log({ id: value });
     props.propsfake.onDeleteUsers({ id: value });
   };
+
   
 
   return (
@@ -218,8 +218,11 @@ const EnhancedTableToolbar = props => {
           
             
           <DialogAlert
+          // onClick = {console.log(numSelected)}
             // icon={<DeleteIcon />}
             // style={{ marginBottom: '50px' }}
+            onResetSelected={props.handleReset}
+            // numSelected={props.isSelected}
             value={selectedId[0]}
             onAccept={() => {
               handDeletess(selectedId[0]);
@@ -325,7 +328,10 @@ export  function MemberPage(props) {
    
   }, []);
 
- 
+const handleReset = () => {
+  setSelected([]);
+}
+
 
 
   const handleRequestSort = (event, property) => {
@@ -384,7 +390,7 @@ export  function MemberPage(props) {
     
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} selectedId={selected} propsfake = {props} />
+        <EnhancedTableToolbar handleReset={handleReset} numSelected={selected.length}  selectedId={selected} propsfake = {props} />
         <TableContainer>
           <Table
             className={classes.table}

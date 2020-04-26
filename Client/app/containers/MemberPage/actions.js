@@ -7,6 +7,7 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
 } from './constants';
+import history from '../../utils/history';
 // import { func } from 'prop-types';
 
 export function getAllUserAction(body){
@@ -42,4 +43,5 @@ export function deleteUserSuccess(query) {
     type: DELETE_USER_SUCCESS,
     query,
   };
+ 
 }

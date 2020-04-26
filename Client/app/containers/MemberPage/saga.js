@@ -1,9 +1,10 @@
 // MemberPage Saga
 
-import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery, delay } from 'redux-saga/effects';
 import {USER} from '../../urlConfig';
 import * as types from './constants';
 import axios from 'axios';
+import history from '../../utils/history';
 
 import { getAllUserAction, getAllUserSuccessAction, getAllUserFalseAction, deleteUserSuccess,} from './actions';
 
@@ -46,9 +47,15 @@ export function* deleteUser(action) {
       },
     });
     if (deletedUser) {
+      console.log(history);
+      // history.push('/admin');
+      // location.reload();
+      // window.history.back();
       yield put({
         type: types.GET_USER,
+        
       });
+    //  yield delay(1000);
       yield put(
         deleteUserSuccess({
           filter: {
@@ -58,6 +65,8 @@ export function* deleteUser(action) {
         }),
 
       );
+      
+     
     } else {
       // yield put(getUsersError({})); // reused
     }
