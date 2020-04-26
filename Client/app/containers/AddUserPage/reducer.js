@@ -8,6 +8,8 @@ import produce from 'immer';
 import {
   CREATE_USER,
   CREATE_USER_SUCCESS,
+  UPDATE_USER,
+  UPDATE_USER_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -28,6 +30,16 @@ const addUserPageReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = false;
         draft.success = true;      
+        break;
+      case UPDATE_USER:
+        draft.loading = true;
+        draft.error = false;
+        draft.success = false;
+        break;
+      case UPDATE_USER_SUCCESS:
+        draft.loading = false;
+        draft.error = false;
+        draft.success = true;
         break;
       
     }

@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 // import CardTitle from '@material-ui/core/Card'
 import { useDropzone } from "react-dropzone"
+import './test.css';
 
 function ProgrammaticallyDropzone(props) {
  

@@ -27,7 +27,7 @@ import GenderRatio from '../../components/Ratio/gender';
 
 
 //=====================================
-import { createUserAction } from './actions';
+import { createUserAction, updateUserAction } from './actions';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -111,7 +111,7 @@ export function AddUserPage(props) {
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
   const [isFormer, setIsFormer] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState('');
 
   useEffect(() => {
 
@@ -140,7 +140,7 @@ export function AddUserPage(props) {
       setIsFormer(false);
       setFullName("");
       setEmail("");
-      setRole('');
+      setRole("");
       setStudentCode("");
       setSchoolClass("");
       setFaculty("");
@@ -155,30 +155,55 @@ export function AddUserPage(props) {
       setQrCode("");
 
     }
-  }, [props.Editdatas]);
+  }, []);
 
   function handleSubmit() {
+    if (props.isEditcheck && props.Editdatas){
+      props.onUpdateUser({  
+        _id: props.Editdatas._id,    
+         fullName ,
+         email ,
+         role ,
+         studentCode ,
+        class: schoolClass,
+         clubYear ,
+         faculty ,
+         schoolYear ,
+         phone ,
+         address ,
+         dob ,
+         position ,
+         gender ,
+         isActive ,
+         bio ,
+         avatar ,
+         qrCode ,
+         isFormer ,
+      });
+    }else{
     props.onCreateUser({
-      ...{ fullName },
-      ...{ email },
-      ...{ role },
-      ...{ studentCode },
+       fullName ,
+       email ,
+       role ,
+       studentCode ,
       class: schoolClass,
-      ...{ clubYear },
-      ...{ faculty },
-      ...{ schoolYear },
-      ...{ phone },
-      ...{ address },
-      ...{ dob },
-      ...{ position },
-      ...{ gender },
-      ...{ isActive },
-      ...{ bio },
-      ...{ avatar },
-      ...{ qrCode },
-      ...{ isFormer },
+       clubYear ,
+       faculty ,
+       schoolYear ,
+       phone ,
+       address ,
+       dob ,
+       position,
+       gender ,
+       isActive ,
+       bio ,
+       avatar ,
+       qrCode ,
+       isFormer ,
     });
-    clearData();
+      clearData();
+  }
+    
     handleClose();
 
     console.log({
@@ -212,7 +237,7 @@ export function AddUserPage(props) {
       setEmail('');
       setGender('');
       setFaculty('');
-      setIsActive(true);
+      setIsActive("");
       setRole('');
       setBio('');
       setAvatar('');
@@ -589,6 +614,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     // onGetUsers: query => dispatch(getUsers(query)),
     onCreateUser: newUser => dispatch(createUserAction(newUser)),
+    onUpdateUser: newUser => dispatch(updateUserAction(newUser)),
     
   };
 }

@@ -1,2 +1,0 @@
-export const UPDATE_USER = 'app/UPDATE_USER';
-export const UPDATE_USER_SUCCESS = 'app/UPDATE_USER_SUCCESS';
