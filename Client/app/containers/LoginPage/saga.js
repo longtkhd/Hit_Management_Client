@@ -3,6 +3,7 @@ import axios from 'axios';
 import { loginSucceed, loginFaild } from './actions';
 import * as types from './constants';
 import { LOGIN_API } from '../../urlConfig';
+import { changeSnackbar } from '../MemberPage/actions';
 
 export function* login(action) {
   console.log('login');
@@ -20,8 +21,15 @@ export function* login(action) {
       console.log('data');
       localStorage.setItem('token', data.data.token);
       localStorage.setItem('isAuthenticated', true);
-      
+     
       yield put(loginSucceed(data.data.token));
+      // yield put(
+      //   changeSnackbar({
+      //     status: true,
+      //     message: 'Đăng nhập thành công'
+      //   }),
+      // );
+      
     }
   } catch (error) {}
 }

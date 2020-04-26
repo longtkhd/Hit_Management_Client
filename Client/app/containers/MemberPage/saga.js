@@ -5,6 +5,7 @@ import {USER} from '../../urlConfig';
 import * as types from './constants';
 import axios from 'axios';
 import history from '../../utils/history';
+import {changeSnackbar} from './actions';
 
 import { getAllUserAction, getAllUserSuccessAction, getAllUserFalseAction, deleteUserSuccess,} from './actions';
 
@@ -23,7 +24,10 @@ export function* fetchGetAllUser(action){
 
     if(data){
     console.log(data.data)
+     
       yield put(getAllUserSuccessAction(data.data));
+     
+     
     }else{
       yield put(getAllUserFalseAction({}));
       console.log("fetch api failed");
@@ -55,6 +59,12 @@ export function* deleteUser(action) {
         type: types.GET_USER,
         
       });
+      yield put(
+        changeSnackbar({
+          status: true,
+          message : 'Xóa thành công'
+        }),
+      );
     //  yield delay(1000);
       yield put(
         deleteUserSuccess({

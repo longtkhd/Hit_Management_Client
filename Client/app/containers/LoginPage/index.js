@@ -27,6 +27,8 @@ import { login, logOut } from './actions';
 import bg from '../../images/pages/login.jpg'
 // import logo from '../../images/logos/LogoHIT.png'
 import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
+import CustomizedSnackbars from '../../components/SnackBar/index'
+import { closeSnackbar} from '../MemberPage/actions';
 
 
 import logo from '../../images/logos/LogoHIT.png';
@@ -83,14 +85,14 @@ export function SignIn(props) {
     if ( isAuth) {
       console.log(props.singIn);
       
-      props.history.push('/admin');
+      props.history.push('/admin/dashboard');
     }
   }), [props.signIn.isLoading];
 
   useEffect(() => {  
     const isAuth = localStorage.getItem('isAuthenticated');
     if (props.signIn.logined || isAuth) {
-      props.history.push('/admin');
+      props.history.push('/admin/dashboard');
       props.dispatch(logOut());
     }
   }), [];
@@ -111,6 +113,7 @@ export function SignIn(props) {
     
     
     <Container component="main" maxWidth="xs" >
+      <CustomizedSnackbars open={memberPage.status} message={memberPage.message} onClose={props.onCloseSnackbar} />
       
       
       
@@ -219,6 +222,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     onLogin: (email, password) => dispatch(login(email, password)),
+    onCloseSnackbar: () => dispatch(closeSnackbar()),
 
   };
 }

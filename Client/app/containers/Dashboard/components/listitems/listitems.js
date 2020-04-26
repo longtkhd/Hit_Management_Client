@@ -24,7 +24,7 @@ export function MainListItems() {
   
     <MenuList>
     
-    <MenuItem component={NavLink} to="/dashboard" 
+    <MenuItem component={NavLink} to="/admin/dashboard" 
       activeStyle={{
         
           color:"white",
@@ -42,7 +42,7 @@ export function MainListItems() {
     </MenuItem> 
     
         {/* ================= */}         
-    <MenuItem component={NavLink} to="/user" 
+    <MenuItem component={NavLink} to="/admin/user" 
       activeStyle={{
         color: "white",
         borderRadius: "4px",

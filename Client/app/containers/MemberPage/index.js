@@ -36,10 +36,12 @@ import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectMemberPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getAllUserAction ,deleteUsers} from './actions';
+import { getAllUserAction, deleteUsers, closeSnackbar} from './actions';
 import AddUserPage from '../AddUserPage/index';
 import DialogAlert from '../../components/DialogAlert';
 import {BASE_URL} from '../../urlConfig'
+
+import CustomizedSnackbars from '../../components/SnackBar/index'
 // import { Delete} from '@material-ui/icons'
 
 // import  DialogMember from '../../components/DialogMember/index';
@@ -324,7 +326,7 @@ export  function MemberPage(props) {
         role: 'admin',
       },
     });
-    // console.log(memberPage)
+    console.log( memberPage)
    
   }, []);
 
@@ -389,6 +391,7 @@ const handleReset = () => {
   return (
     
     <div className={classes.root}>
+      <CustomizedSnackbars open={memberPage.status} message={memberPage.message} onClose={props.onCloseSnackbar}/>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar handleReset={handleReset} numSelected={selected.length}  selectedId={selected} propsfake = {props} />
         <TableContainer>
@@ -530,6 +533,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     onDeleteUsers: user => dispatch(deleteUsers(user)),
     onGetUsers: body => dispatch(getAllUserAction(body)),
+    onCloseSnackbar: () => dispatch(closeSnackbar()),
     
  
   };

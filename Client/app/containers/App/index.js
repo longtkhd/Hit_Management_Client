@@ -7,6 +7,7 @@
  */
 
 import React, { Suspense, lazy } from 'react';
+import { Redirect } from "react-router-dom"
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { Switch, Route, Router} from 'react-router-dom';
@@ -33,6 +34,7 @@ const MemberPage = lazy(() => import("../MemberPage"));
 const Dashboard = lazy(() => import("../Dashboard/index"));
 const NotFoundPage = lazy(() => import("containers/NotFoundPage/Loadable"));
 const DashboardPage = lazy(() => import("../DashboardPage/index"));
+import Home from '../Home/index'
 
 
 
@@ -42,27 +44,34 @@ export default function App() {
       <Suspense fallback={<CircularIndeterminate></CircularIndeterminate>} >
         <AppWrapper>
           <Switch>
-            <Route  path="/login" component={LoginPage} />
+           
+            <Route exact path="/" component={Home} />
+            
+           
                 <PrivateRoute
-                  path="/user"
+                  exact
+                  path="/admin"
                   layout={Dashboard}
                   component={MemberPage}
                   title="Dashboard Page"
                 />
                 {/* User in dashboard ============= */}
                 <PrivateRoute
-                  path="/admin"
+                   exact
+                  path="/admin/user"
                   layout={Dashboard}
                   component={MemberPage}
                   title="Thành Viên"
                 />
                 {/* Admin =========================== */}
                 <PrivateRoute
-                  path="/dashboard"
+                  exact
+                  path="/admin/dashboard"
                   layout={Dashboard}
                   component={DashboardPage}
                   title="Dashboard Page"
                 />
+              <Route path="/login" component={LoginPage} />
                 {/* Dashboard Page=================== */}
                 <Route path="*" component={NotFoundPage} />
                 {/* NotFound ========================*/} 

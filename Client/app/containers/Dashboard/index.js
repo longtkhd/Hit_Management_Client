@@ -30,6 +30,8 @@ import saga from '../LoginPage/reducer';
 import { login, logOut } from '../LoginPage/actions';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
+// import CustomizedSnackbars from '../../components/SnackBar'
+import CustomizedSnackbars from '../../components/SnackBar/index'
 
 
 function Copyright() {
@@ -189,9 +191,12 @@ export  function Dashboard(props) {
 
               }} />
             </Badge>
+            
           </IconButton>
         </Toolbar>
+        
       </AppBar>
+   
       <Drawer
         variant="permanent"
         classes={{
@@ -220,10 +225,14 @@ export  function Dashboard(props) {
         <Divider />
         <List>{secondaryListItems}</List>
       </Drawer>
-      <main className={classes.content}>
+      <main className={classes.content} >
+        
         <div className={classes.appBarSpacer} />
+        
+      
         <Container maxWidth="lg" className={classes.container}>
           
+         
           {children}
             {/* Recent Orders */}
             

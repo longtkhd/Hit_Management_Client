@@ -8,6 +8,8 @@
     GET_USER_FALSE,
     DELETE_USER,
     DELETE_USER_SUCCESS,
+    CLOSE_SNACKBAR,
+    CHANGE_SNACKBAR
   } from './constants';
 
   export const initialState = {
@@ -52,6 +54,16 @@ const memberPageReducer = (state = initialState, action) =>
         draft.success = true;
         draft.error = false;
         break;
+
+      case CLOSE_SNACKBAR:
+        draft.status = false;
+        break;
+      case CHANGE_SNACKBAR:
+        draft.status = action.data.status;
+        draft.message = action.data.message;
+        break;
+       
+       
     }
   });
 

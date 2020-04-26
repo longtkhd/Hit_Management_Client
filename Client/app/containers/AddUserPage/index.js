@@ -111,7 +111,7 @@ export function AddUserPage(props) {
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
   const [isFormer, setIsFormer] = useState(false);
-  const [isActive, setIsActive] = useState('');
+  const [isActive, setIsActive] = useState(true);
 
   useEffect(() => {
 
@@ -414,7 +414,7 @@ export function AddUserPage(props) {
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
-                      validators={['required', 'isNumber']}
+                      validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này',
                         'Vui lòng nhập kí tự số',
                       ]}
@@ -433,11 +433,11 @@ export function AddUserPage(props) {
                       validators={['required',
                         'isNumber',
                         'minStringLength:10',
-                        'maxStringLength:10',]}
+                        'maxStringLength:11',]}
                       errorMessages={['Vui lòng nhập dữ liệu trường này',
                         'Yêu cầu nhập kí tự số',
-                        'Số điện thoại với 10 kí tự số',
-                        'Số điện thoại với 10 kí tự số',]}
+                        'Số điện thoại với 10 hoặc 11 kí tự số',
+                        'Số điện thoại với 10 hoặc 11 kí tự số',]}
                       
                       label="Số điện thoại"
                       margin="normal"

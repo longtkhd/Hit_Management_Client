@@ -4,7 +4,8 @@ import * as types from './constants';
 import axios from 'axios';
 import { createUserAction, createUserSuccessAction, updateUserSuccessAction} from './actions';
 import * as typesGetuser from '../MemberPage/constants';
-
+import { changeSnackbar } from '../MemberPage/actions'; //snackbar display
+import * as members from '../MemberPage/constants' 
 export function* createUser(action) {
 
   // const formData = new FormData();
@@ -44,9 +45,15 @@ export function* createUser(action) {
     if (createdUser) {
       console.log('creat user success');
       yield put({
-        type: typesGetuser.GET_USER,
+        type: members.GET_USER,
+
       });
-      // yield put(createUserSuccessAction());
+      yield put(
+        changeSnackbar({
+          status: true,
+          message: 'Tạo thành công'
+        }),
+      );
       
     } else {
       // yield put(getUsersError({}));
