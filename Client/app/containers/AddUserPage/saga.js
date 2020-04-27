@@ -51,7 +51,8 @@ export function* createUser(action) {
       yield put(
         changeSnackbar({
           status: true,
-          message: 'Tạo thành công'
+          message: 'Thêm mới thành công',
+          color: 'success'
         }),
       );
       
@@ -59,6 +60,13 @@ export function* createUser(action) {
       // yield put(getUsersError({}));
     }
   } catch (error) {
+    yield put(
+      changeSnackbar({
+        status: true,
+        message: 'Thêm mới thất bại',
+        color: 'warning'
+      }),
+    );
     // yield put(getUsersError(error));
   }
 }
@@ -99,11 +107,32 @@ export function* updateUser(action) {
       yield put({
         type: typesGetuser.GET_USER,
       });
+      yield put(
+        changeSnackbar({
+          status: true,
+          message: 'Cập nhât thành công',
+          color: 'success'
+        }),
+      );
       
     } else {
+      yield put(
+        changeSnackbar({
+          status: true,
+          message: 'Cập nhật thất bại',
+          color: 'warning'
+        }),
+      );
       // yield put(getAllUserFalseAction({}));
     }
   } catch (error) {
+    yield put(
+      changeSnackbar({
+        status: true,
+        message: 'Cập nhật thất bại',
+        color: 'warning'
+      }),
+    );
     // yield put(getAllUserFalseAction(error));
   }
 }

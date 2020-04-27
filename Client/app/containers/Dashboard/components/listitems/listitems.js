@@ -6,10 +6,15 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import SettingsIcon from '@material-ui/icons/Settings';
+import CameraTwoToneIcon from '@material-ui/icons/CameraTwoTone';
+// import BarChartIcon from '@material-ui/icons/BarChart';
+// import LayersIcon from '@material-ui/icons/Layers';
+// import AssignmentIcon from '@material-ui/icons/Assignment';
+// import CameraTwoToneIcon from '@material-ui/icons/CameraTwoTone';
+import ImportContactsOutlinedIcon from '@material-ui/icons/ImportContactsOutlined';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
 import { BrowserRouter as Router, Switch, Route, NavLink } from 'react-router-dom';
@@ -25,8 +30,7 @@ export function MainListItems() {
     <MenuList>
     
     <MenuItem component={NavLink} to="/admin/dashboard" 
-      activeStyle={{
-        
+      activeStyle={{       
           color:"white",
           borderRadius:"4px",
           boxShadow: "0 0 10px 1px rgba(115, 103, 240, 0.7)" ,
@@ -38,7 +42,7 @@ export function MainListItems() {
         
           <HomeIcon />
           
-        <ListItemText primary="Dashboard" style={{ paddingLeft: "30px" }} />   
+        <ListItemText primary="Dashboard" style={{ paddingLeft: "35px" }} />   
     </MenuItem> 
     
         {/* ================= */}         
@@ -54,9 +58,26 @@ export function MainListItems() {
         
           <PeopleIcon />       
         <ListItemText primary="Users" 
-          style={{ paddingLeft: "30px" }}
+          style={{ paddingLeft: "35px" }}
         />
       
+      </MenuItem> 
+
+      <MenuItem component={NavLink} to="/admin/setting"
+        activeStyle={{
+          color: "white",
+          borderRadius: "4px",
+          boxShadow: "0 0 10px 1px rgba(115, 103, 240, 0.7)",
+          background: "linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7))"
+        }}>
+
+
+
+        <ImportContactsOutlinedIcon />
+        <ListItemText primary="More"
+          style={{ paddingLeft: "35px" }}
+        />
+
       </MenuItem> 
   
 
@@ -87,24 +108,18 @@ export function MainListItems() {
 
 export const secondaryListItems = (
   <div>
-    <ListSubheader inset>Saved reports</ListSubheader>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Current month" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Last quarter" />
-    </ListItem>
-    <ListItem button>
-      <ListItemIcon>
-        <AssignmentIcon />
-      </ListItemIcon>
-      <ListItemText primary="Year-end sale" />
-    </ListItem>
+    <ListSubheader inset></ListSubheader>
+    <MenuItem component={NavLink} to="/admin/setting"
+      activeStyle={{
+        color: "white",
+        borderRadius: "4px",
+        boxShadow: "0 0 10px 1px rgba(115, 103, 240, 0.7)",
+        background: "linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7))"
+      }}>
+      <SettingsIcon />
+      <ListItemText primary="Setting"
+        style={{ paddingLeft: "35px" }}
+      />
+    </MenuItem> 
   </div>
 );

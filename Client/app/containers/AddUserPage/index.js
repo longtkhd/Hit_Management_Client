@@ -544,18 +544,18 @@ export function AddUserPage(props) {
                   
                   
 
-                  <Grid item xs={12} >
-                    <TextValidator
+                  <Grid item xs={12}  >
+                    <TextValidator                     
                       variant="outlined"
                       className={classes.textField}
                       fullWidth
                       validators={['required']}
                       errorMessages={['Vui lòng nhập dữ liệu trường này']}
-                    //  className = 'p-4'
                       label="Giới thiệu ngắn "
                       margin="normal"
                       onChange = {e => setBio(e.target.value)}
                       value = {bio}
+                      
                     />
                   </Grid>
 
@@ -574,6 +574,7 @@ export function AddUserPage(props) {
                     <UploadImg 
                       name ='Avatar'
                       onFiles={value => setAvatar(value)}
+                      value = {avatar}
                       
                       
                     />

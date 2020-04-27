@@ -61,6 +61,7 @@ const memberPageReducer = (state = initialState, action) =>
       case CHANGE_SNACKBAR:
         draft.status = action.data.status;
         draft.message = action.data.message;
+        draft.color = action.data.color;
         break;
        
        

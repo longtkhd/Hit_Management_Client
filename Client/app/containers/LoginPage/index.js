@@ -113,7 +113,7 @@ export function SignIn(props) {
     
     
     <Container component="main" maxWidth="xs" >
-      <CustomizedSnackbars open={memberPage.status} message={memberPage.message} onClose={props.onCloseSnackbar} />
+      {/* <CustomizedSnackbars open={memberPage.status} message={memberPage.message} onClose={props.onCloseSnackbar} /> */}
       
       
       
@@ -135,7 +135,7 @@ export function SignIn(props) {
           src={logo}
           style={{ width: "80px" ,marginRight:'10px'}}
         />
-          <FavoriteTwoToneIcon color='secondary' align="center"/>
+          {/* <FavoriteTwoToneIcon color='secondary' align="center"/> */}
       </Link>
        
          
@@ -222,7 +222,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     onLogin: (email, password) => dispatch(login(email, password)),
-    onCloseSnackbar: () => dispatch(closeSnackbar()),
+    // onCloseSnackbar: () => dispatch(closeSnackbar()),
 
   };
 }

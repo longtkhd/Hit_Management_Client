@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedSnackbars(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  console.log(props.open);
-  console.log(props.message)
+  // console.log(props.open);
+  // console.log(props.message)
 
   // const handleClick = () => {
   //   setOpen(true);
@@ -43,7 +43,7 @@ export default function CustomizedSnackbars(props) {
         vertical: 'top',
         horizontal: 'right',}}
         >
-        <Alert onClose={handleClose} severity="success">
+        <Alert onClose={handleClose} severity={props.color}>
           {props.message}
         </Alert>
       </Snackbar>

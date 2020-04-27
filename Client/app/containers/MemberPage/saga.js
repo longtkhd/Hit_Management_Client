@@ -62,7 +62,8 @@ export function* deleteUser(action) {
       yield put(
         changeSnackbar({
           status: true,
-          message : 'Xóa thành công'
+          message : 'Xóa thành công',
+          color: 'success'
         }),
       );
     //  yield delay(1000);
@@ -79,6 +80,14 @@ export function* deleteUser(action) {
      
     } else {
       // yield put(getUsersError({})); // reused
+      yield put(
+        changeSnackbar({
+          status: true,
+          message: 'Xóa thất bại',
+          color: 'error'
+        }),
+      );
+      
     }
   } catch (error) {
     // yield put(getUsersError(error));

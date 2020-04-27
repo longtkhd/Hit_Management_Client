@@ -40,6 +40,7 @@ import { getAllUserAction, deleteUsers, closeSnackbar} from './actions';
 import AddUserPage from '../AddUserPage/index';
 import DialogAlert from '../../components/DialogAlert';
 import {BASE_URL} from '../../urlConfig'
+import Chip from '@material-ui/core/Chip';
 
 import CustomizedSnackbars from '../../components/SnackBar/index'
 // import { Delete} from '@material-ui/icons'
@@ -391,7 +392,7 @@ const handleReset = () => {
   return (
     
     <div className={classes.root}>
-      <CustomizedSnackbars open={memberPage.status} message={memberPage.message} onClose={props.onCloseSnackbar}/>
+      <CustomizedSnackbars color ={memberPage.color }open={memberPage.status} message={memberPage.message} onClose={props.onCloseSnackbar}/>
       <Paper className={classes.paper}>
         <EnhancedTableToolbar handleReset={handleReset} numSelected={selected.length}  selectedId={selected} propsfake = {props} />
         <TableContainer>
@@ -443,8 +444,7 @@ const handleReset = () => {
                           <Avatar
                             className={classes.avatar}
                             src={`${BASE_URL}/user/${row._id}/avatar/large`}
-                          >
-                           
+                          >                           
                           </Avatar>
                           <Typography variant="body1">{row.fullName}</Typography>
                         </div>
@@ -453,10 +453,9 @@ const handleReset = () => {
                       <TableCell align="right" >{row.email}</TableCell>
                       <TableCell align="right" >{row.class}</TableCell>
                       <TableCell align="right" >{row.schoolYear}</TableCell>
-                      <TableCell align="right" >{row.schoolYear}</TableCell>
+                      <TableCell align="right" >{row.isActive ? <Chip size="small" label="active  " style={{ color: 'white', backgroundColor: '#4caf50' }} variant='outlined' /> : <Chip size="small" label="inactive" style={{ color: 'white', backgroundColor: 'red' }}/> }</TableCell>
                       <TableCell align="right" > 
-                      <Tooltip title="Edit">
-                         
+                      <Tooltip title="Edit">                        
                           <IconButton aria-label="Edit" 
                             onClick={() => {
                             setOpen(true);
@@ -465,11 +464,7 @@ const handleReset = () => {
                           }}
                           > 
                             < AddUserPage isEditcheck={true} Editdatas={ row} />                         
-                            {/* <EditUser Editdatas={Object.assign({}, row)}/> */}
                         </IconButton>
-
-                         
-
                       </Tooltip>
                       
                         
