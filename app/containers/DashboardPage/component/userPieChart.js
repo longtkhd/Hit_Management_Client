@@ -104,7 +104,7 @@ const UserChart = props => {
     },
     {
       title: 'other',
-      value: '15',
+      value: '22',
       icon: <SentimentVeryDissatisfiedIcon style={{ color: 'blue' }} />,
       color: theme.palette.warning.main
     },

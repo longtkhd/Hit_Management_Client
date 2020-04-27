@@ -54,20 +54,21 @@ export  function DashboardPage(props) {
                 className={classes.logoImage}
                 // src="/images/logos/brainalytica_logo.svg"
                 alt="anh"
+                src={welcomImg1}
+                style={{ width: "50%" }}
+              />
+            </Paper>
+          </Grid>
+          
+          <Paper className={classes.paper}>
+              <img align="center"
+                className={classes.logoImage}
+                // src="/images/logos/brainalytica_logo.svg"
+                alt="anh"
                 src={dashboardImg}
                 style={{ width: "100%" }}
               />
             </Paper>
-          </Grid>
-          <Paper className={classes.paper}>
-            <img align="center"
-              className={classes.logoImage}
-              // src="/images/logos/brainalytica_logo.svg"
-              alt="anh"
-              src={welcomImg1}
-              style={{ width: "50%" }}
-            />
-          </Paper>
         </Grid>
         
         <Grid item xs={6}>
