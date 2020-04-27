@@ -332,7 +332,7 @@ export  function MemberPage(props) {
   }, []);
 
 const handleReset = () => {
-  setSelected([]);
+  setSelected([]); //reset isActive to hide delete icon
 }
 
 

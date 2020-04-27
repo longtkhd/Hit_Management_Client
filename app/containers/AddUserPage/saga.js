@@ -114,8 +114,7 @@ export function* updateUser(action) {
           color: 'success'
         }),
       );
-     
-     
+      // location.reload();    
       
     } else {
      

@@ -42,8 +42,12 @@ export default function RadioButtonsGroup(props) {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-    onRatio(event.target.value);
-    console.log(event.target.value)
+    if (event.target.value== 'true'){
+      onRatio(true);
+    } else if (event.target.value == 'false'){
+      onRatio(false);
+    }   
+    
   };
 
   return (

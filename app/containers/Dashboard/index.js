@@ -20,6 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { MainListItems, secondaryListItems } from './components/listitems/listitems';
 import logo from '../../images/logos/LogoHIT.png';
+import hitlogo from '../../images/HIT/banner-1.png'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -224,6 +225,15 @@ export  function Dashboard(props) {
         <MainListItems/>
         <Divider />
         <List>{secondaryListItems}</List>
+        <Link className={classes.logoLink} to="/">
+          <img align="center"
+            className={classes.logoImage}
+            // src="/images/logos/brainalytica_logo.svg"
+            alt="anh"
+            src={hitlogo}
+            style={{ width: "100%"}}
+          />
+        </Link>
       </Drawer>
       <main className={classes.content} >
         

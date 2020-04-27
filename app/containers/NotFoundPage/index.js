@@ -8,7 +8,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { makeStyles } from '@material-ui/core/styles';
 import Background from '../../images/pages/register.jpg';
-import bg from '../../images/pages/login.jpg';
+import bg from '../../images/HIT/asset2.png';
 const useStyles = makeStyles(theme => ({
   notFound: {
     maxWidth: "520px",
@@ -32,9 +32,9 @@ const useStyles = makeStyles(theme => ({
   },
   spanClass: {
     display: "inline-block",
-    width: "120px",
+    width: "150px",
     height: "120px",
-    backgroundImage: `url(${Background})`,
+    backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
     zIndex: "-1"
   },
