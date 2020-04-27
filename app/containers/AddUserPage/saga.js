@@ -102,7 +102,7 @@ export function* updateUser(action) {
       data: formData,
     });
     if (updatedUser) {
-      
+     
       // yield put(updateUserSuccessAction());
       yield put({
         type: typesGetuser.GET_USER,
@@ -114,15 +114,11 @@ export function* updateUser(action) {
           color: 'success'
         }),
       );
+     
+     
       
     } else {
-      yield put(
-        changeSnackbar({
-          status: true,
-          message: 'Cập nhật thất bại',
-          color: 'warning'
-        }),
-      );
+     
       // yield put(getAllUserFalseAction({}));
     }
   } catch (error) {

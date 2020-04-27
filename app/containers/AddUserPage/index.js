@@ -111,11 +111,12 @@ export function AddUserPage(props) {
   const [avatar, setAvatar] = useState('');
   const [qrCode, setQrCode] = useState('');
   const [isFormer, setIsFormer] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState('');
 
   useEffect(() => {
 
     if (props.isEditcheck && props.Editdatas) {
+      
       setFullName(props.Editdatas.fullName);
       setEmail(props.Editdatas.email);
       setRole(props.Editdatas.role);
@@ -129,14 +130,14 @@ export function AddUserPage(props) {
       setDob(props.Editdatas.dob);
       setPosition(props.Editdatas.position);
       setGender(props.Editdatas.gender);
-      setIsActive(props.Editdatas.isActive);
+      setIsActive(props.Editdatas.isActive.toString());
       setBio(props.Editdatas.bio);
       setAvatar(props.Editdatas.avatar);
       setQrCode(props.Editdatas.qrCode);
       setIsFormer(props.Editdatas.isFormer);
     } else {
       setDob(new Date('2000/09/27'));
-      setIsActive(true);
+      setIsActive('');
       setIsFormer(false);
       setFullName("");
       setEmail("");
