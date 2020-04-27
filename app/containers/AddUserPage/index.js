@@ -271,8 +271,8 @@ export function AddUserPage(props) {
       
       
     
-     {props.isEditcheck ? <EditIcon onClick={handleClickOpen} />:<Tooltip title="Add"><Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Add
+     {props.isEditcheck ? <EditIcon onClick={handleClickOpen} />:<Tooltip title="Add"><Button  variant="outlined" color="primary" onClick={handleClickOpen}>
+      Add
       </Button>
       </Tooltip>
 }
