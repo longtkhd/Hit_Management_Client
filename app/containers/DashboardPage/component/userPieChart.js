@@ -72,7 +72,7 @@ const UserChart = props => {
       display: true
     },
     responsive: true,
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     animation: false,
     cutoutPercentage: 80,
     layout: { padding: 0 },
@@ -93,19 +93,19 @@ const UserChart = props => {
     {
       title: 'Active',
       value: '63',
-      icon: <SentimentVerySatisfiedIcon style ={{color:'green'}} />,
+      // icon: <SentimentVerySatisfiedIcon style ={{color:'green'}} />,
       color: theme.palette.success.main
     },
     {
       title: 'InActive',
       value: '15',
-      icon: <SentimentVeryDissatisfiedIcon style ={{color:'red'}} />,
+      // icon: <SentimentVeryDissatisfiedIcon style ={{color:'red'}} />,
       color: theme.palette.error.main
     },
     {
       title: 'other',
       value: '22',
-      icon: <SentimentVeryDissatisfiedIcon style={{ color: 'blue' }} />,
+      // icon: <SentimentVeryDissatisfiedIcon style={{ color: 'blue' }} />,
       color: theme.palette.warning.main
     },
     

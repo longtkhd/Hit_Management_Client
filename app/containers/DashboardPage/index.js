@@ -16,6 +16,9 @@ import { getAllUserAction} from '../MemberPage/actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import Demo from './component/rotated'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,60 +48,55 @@ export  function DashboardPage(props) {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <img align="center"
-                className={classes.logoImage}
-                // src="/images/logos/brainalytica_logo.svg"
-                alt="anh"
-                src={welcomImg1}
-                style={{ width: "50%" }}
-              />
-            </Paper>
-          </Grid>
-          
-          <Paper className={classes.paper}>
-              <img align="center"
-                className={classes.logoImage}
-                // src="/images/logos/brainalytica_logo.svg"
-                alt="anh"
-                src={dashboardImg}
-                style={{ width: "100%" }}
-              />
-            </Paper>
+    <div>
+      {/* <Typography variant="subtitle1" gutterBottom>
+        
+      </Typography> */}
+      <Grid container spacing={3}>
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
-        
-        <Grid item xs={6}>
-         
-          <UserChart style ={{height:'100%'}}/>
-
-          
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
-        
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </Grid>
+        <Grid item xs={3}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </Grid>
+        <Grid item xs={8}>
+          {/* <Paper className={classes.paper}>xs=8</Paper> */}
+          <Demo/>
+        </Grid>
+        <Grid item xs={4}>
+        <UserChart/>
+        </Grid>
       </Grid>
-
-
-
-      {/* hang2 */}
-      <Grid item xs={6}>
-        
-
-          {/* <Paper className={classes.paper}>
-            <img align="center"
-              className={classes.logoImage}
-              // src="/images/logos/brainalytica_logo.svg"
-              alt="anh"
-              src={welcomImg1}
-              style={{ width: "100%" }}
-            />
-          </Paper> */}
-
-      
-       
-      </Grid>
+      <Divider className={classes.divider} />
+      <Typography variant="subtitle1" gutterBottom>
+       Chart
+      </Typography>
+      <div className={classes.container}>
+        <div style={{ gridColumnEnd: 'span 3' }}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </div>
+        <div style={{ gridColumnEnd: 'span 3' }}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </div>
+        <div style={{ gridColumnEnd: 'span 3' }}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </div>
+        <div style={{ gridColumnEnd: 'span 3' }}>
+          <Paper className={classes.paper}>xs=3</Paper>
+        </div>
+        <div style={{ gridColumnEnd: 'span 8' }}>
+          <Paper className={classes.paper}>xs=8</Paper>
+        </div>
+        <div style={{ gridColumnEnd: 'span 4' }}>
+          <Paper className={classes.paper}>xs=4</Paper>
+        </div>
+      </div>
     </div>
   );
 }
