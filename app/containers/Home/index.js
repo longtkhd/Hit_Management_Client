@@ -1,9 +1,10 @@
-import React from 'react';
+import React ,{useState,useEffect} from 'react';
 import '../../assets/css/style.css';
 import '../../assets/css/spinner.css';
 import '../../assets/css/aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import   '../../assets/js/main';
+import { StickyContainer, Sticky } from 'react-sticky';
+// import   '../../assets/js/main';
 
 import logo from '../../assets/img/logo.png'
 import banner1 from '../../assets/img/banner/banner-1.png'
@@ -15,21 +16,54 @@ import ptsClass from '../../assets/img/classHit/pts.jpg'
 import javaClass from '../../assets/img/classHit/java.png'
 import pythonClass from '../../assets/img/classHit/python.png'
 import webClass from '../../assets/img/classHit/web.png'
+import linh from '../../assets/img/boss/linh.png'
+import ngoc from '../../assets/img/boss/ngoc.png'
+import tu from '../../assets/img/boss/tu.png'
+import bqt from '../../images/pages/500.png'
+import tpl from '../../assets/img/Travel/thienphulam.jpg'
+import mochau from '../../assets/img/Travel/mochau.png'
+import trovetuoitho from '../../assets/img/Travel/trovetuoitho.png'
+import banrom from '../../assets/img/Travel/banrom.png'
+import bavi from '../../assets/img/Travel/bavi.png'
+import trav1 from '../../assets/img/Travel/blog-2.png';
 
 export default function Home() {
-  
+  const [scrolled,setScrooled] = useState(false);
 
+  useEffect(() => {
+   window.addEventListener('scroll' , () => {
+     const isTop  = window.scrollY < 100;
+     console.log(window.scrollY);
+     if(isTop !== true){
+       setScrooled(true);
+       console.log(scrolled);
+     }else {
+       setScrooled(false);
+    
+
+     }
+   })
+
+  });
+  
+ 
+
+
+
+ 
+  
   return (
-   
+
+
   
     <div>
-   
+
       {/*================ Header Menu Area start =================*/}
-      <header className="header_area">
-        <div className="main_menu" >
-        
-          <nav className="navbar navbar-expand-lg  " style={{ backgroundColor:'#f57c00'}}>
-            <div className="container box_1620">
+      
+      <header className={scrolled ? 'header_area navbar_fixed' : 'header_area  '} >
+              <div className="main_menu" >
+          <nav className="navbar navbar-expand-lg  ">
+            <div className="container box_1620  ">
               <a className="navbar-brand logo_h" href="index.html"><img className="logoNavbar logo-hit" src={logo} alt="logo" /></a>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="icon-bar" />
@@ -65,6 +99,7 @@ export default function Home() {
           </nav>
         </div>
       </header>
+      
       {/*================Header Menu Area =================*/}
       {/*================Hero Banner Area Start =================*/}
       <section className="hero-banner magic-ball">
@@ -162,8 +197,8 @@ export default function Home() {
                 <div className="tour-card-overlay">
                   <div className="media">
                     <div className="media-body">
-                      <h4>Tham dự sự kiện của Google</h4>
-                      <small>Một số thành viên của câu lạc bộ đã có chuyến đi đầy bổ ích được tổ chức bởi Google.</small>                     
+                      <h4>Lớp Học Photoshop</h4>
+                      <small>Lớp học nhằm mục đích nâng cao tư duy về đồ họa và thiết kế </small>                     
                     </div>                   
                   </div>                   
                   
@@ -194,8 +229,8 @@ export default function Home() {
                 <div className="tour-card-overlay">
                   <div className="media">
                     <div className="media-body">
-                      <h4>Cuộc đua số 2018</h4>
-                      <small>Câu lạc bộ đóng góp quân số trong đội hình của trường đi thi cuộc đua số năm 2018.</small>
+                      <h4>Lớp Web  </h4>
+                      <small>Đến với lớp Web , các bạn sẽ được định hướng rõ hơn về thiết kế web</small>
                       {/* <p>We proper guided our tourist</p> */}
                     </div>
                     {/* <div class="media-price">
@@ -214,8 +249,8 @@ export default function Home() {
                 <div className="tour-card-overlay">
                   <div className="media">
                     <div className="media-body">
-                      <h4>HIT Openday</h4>
-                      <small>Sự kiện quan trọng nhất trong năm của câu lạc bộ nhằm tổng kết,đánh giá công việc của năm cũ và định hướng triển khai công việc trong năm mới.</small>
+                      <h4>Lớp Python </h4>
+                      <small>something...</small>
                       {/* <p>We proper guided our tourist</p> */}
                     </div>
                     {/* <div class="media-price">
@@ -247,8 +282,8 @@ export default function Home() {
                 <div className="tour-card-overlay">
                   <div className="media">
                     <div className="media-body">
-                      <h4>HIT travel</h4>
-                      <small>Sự kiện hằng năm nhằm giúp thành viên thư giãn sau những ngày học tập căng thẳng</small>
+                      <h4>Lớp Java</h4>
+                      <small>Something...</small>
                       {/* <p>We proper guided our tourist</p> */}
                     </div>
                     {/* <div class="media-price">
@@ -268,16 +303,17 @@ export default function Home() {
       <section className="bg-gray section-padding magic-ball magic-ball-testimonial pb-xl-5">
         <div className="container">
           <div className="section-intro text-center pb-90px">
-            <img className="section-intro-img" src="img/home/section-icon.png" alt="" />
-            <h2>Our client says</h2>
-            <p>Fowl have fruit moveth male they are that place you will lesser</p>
+           
+            <h1> <img className="section-intro-img" src={bqt} alt="" width ='30%'/>   Ban Chủ Nhiệm </h1>
+            {/* <p>Fowl have fruit moveth male they are that place you will lesser</p> */}
+            
           </div>
           <div className="owl-carousel owl-theme testimonial pb-xl-5">
             <div className="testimonial__item">
               <div className="row">
                 <div className="col-md-3 col-lg-2 align-self-center">
                   <div className="testimonial__img">
-                    <img className="card-img rounded-0" src="img/testimonial/t-slider1.png" alt="" />
+                    <img className="card-img rounded-0" src={linh} alt="" />
                   </div>
                 </div>
                 <div className="col-md-9 col-lg-10">
@@ -294,7 +330,7 @@ export default function Home() {
               <div className="row">
                 <div className="col-md-3 col-lg-2 align-self-center">
                   <div className="testimonial__img">
-                    <img className="card-img rounded-0" src="img/testimonial/t-slider1.png" alt="" />
+                    <img className="card-img rounded-0" src={tu} alt="" />
                   </div>
                 </div>
                 <div className="col-md-9 col-lg-10">
@@ -311,7 +347,7 @@ export default function Home() {
               <div className="row">
                 <div className="col-md-3 col-lg-2 align-self-center">
                   <div className="testimonial__img">
-                    <img className="card-img rounded-0" src="img/testimonial/t-slider1.png" alt="" />
+                    <img className="card-img rounded-0" src={ngoc} alt="" />
                   </div>
                 </div>
                 <div className="col-md-9 col-lg-10">
@@ -332,68 +368,60 @@ export default function Home() {
       <section className="section-padding bg-gray">
         <div className="container">
           <div className="section-intro text-center pb-90px">
-            {/* <img class="section-intro-img" src="img/home/section-icon.png" alt=""> */}
-            <h1>Ban chủ nhiệm hiện tại</h1>
-            {/* <p>Fowl have fruit moveth male they are that place you will lesser</p> */}
+            <img className="section-intro-img" src="img/home/section-icon.png" alt="" />
+            <h2>From our Blog</h2>
+            <p>Fowl have fruit moveth male they are that place you will lesser</p>
           </div>
           <div className="row">
             <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
               <div className="card-blog">
-                <img className="card-img rounded-0" src="img/boss/tu.png" alt="" />
+                <img className="card-img rounded-0" src={tpl} alt="" />
                 <div className="card-blog-body">
-                  {/* <a href="#">
-          <h4>Forest responds to consultation smoking in al fresco.</h4>
-        </a> */}
-                  {/* <ul class="card-blog-info">
-          <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>Jan 03, 2018</a></li>
-          <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03 Comments</a></li>
-        </ul>
-        <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p> */}
-                  <h3 style={{ textAlign: 'center', fontSize: '30px' }}>Đoàn Phùng Tú</h3>
-                  <hr />
-                  <h3 style={{ textAlign: 'center' }}>Phó chủ nhiệm</h3>
+                  <a href="#">
+                    <h4>Forest responds to consultation smoking in al fresco.</h4>
+                  </a>
+                  <ul className="card-blog-info">
+                    <li><a href="#"><span className="align-middle"><i className="ti-notepad" /></span>Jan 03, 2018</a></li>
+                    <li><a href="#"><span className="align-middle"><i className="ti-comments-smiley" /></span>03 Comments</a></li>
+                  </ul>
+                  <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
                 </div>
               </div>
             </div>
             <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
               <div className="card-blog">
-                <img className="card-img rounded-0" src="img/boss/linh.png" alt="" />
+                <img className="card-img rounded-0" src={trav1} alt="" />
                 <div className="card-blog-body">
-                  {/* <a href="#">
-          <h4>Forest responds to consultation smoking in al fresco.</h4>
-        </a> */}
-                  {/* <ul class="card-blog-info">
-          <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>Jan 03, 2018</a></li>
-          <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03 Comments</a></li>
-        </ul>
-        <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p> */}
-                  <h3 style={{ textAlign: 'center', fontSize: '30px' }}>Nguyễn Đức Linh</h3>
-                  <hr />
-                  <h3 style={{ textAlign: 'center' }}>Chủ nhiệm</h3>
+                  <a href="#">
+                    <h4>Forest responds to consultation smoking in al fresco.</h4>
+                  </a>
+                  <ul className="card-blog-info">
+                    <li><a href="#"><span className="align-middle"><i className="ti-notepad" /></span>Jan 03, 2018</a></li>
+                    <li><a href="#"><span className="align-middle"><i className="ti-comments-smiley" /></span>03 Comments</a></li>
+                  </ul>
+                  <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
                 </div>
               </div>
             </div>
             <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
               <div className="card-blog">
-                <img className="card-img rounded-0" src="img/boss/ngọc.png" alt="" />
+                <img className="card-img rounded-0" src={trovetuoitho} alt="" />
                 <div className="card-blog-body">
-                  {/* <a href="#">
-          <h4>Forest responds to consultation smoking in al fresco.</h4>
-        </a>
-        <ul class="card-blog-info">
-          <li><a href="#"><span class="align-middle"><i class="ti-notepad"></i></span>Jan 03, 2018</a></li>
-          <li><a href="#"><span class="align-middle"><i class="ti-comments-smiley"></i></span>03 Comments</a></li>
-        </ul>
-        <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
-      </div> */}
-                  <h3 style={{ textAlign: 'center', fontSize: '30px' }}>Hoàng Thị Bích Ngọc</h3>
-                  <hr />
-                  <h3 style={{ textAlign: 'center' }}>Phó chủ nhiệm</h3>
+                  <a href="#">
+                    <h4>Forest responds to consultation smoking in al fresco.</h4>
+                  </a>
+                  <ul className="card-blog-info">
+                    <li><a href="#"><span className="align-middle"><i className="ti-notepad" /></span>Jan 03, 2018</a></li>
+                    <li><a href="#"><span className="align-middle"><i className="ti-comments-smiley" /></span>03 Comments</a></li>
+                  </ul>
+                  <p>Varius metus morbi ferme libero vehic on porta malesuada ut interdu estmales torquent vehicula parturient </p>
                 </div>
               </div>
             </div>
           </div>
-        </div></section>
+        </div>
+      </section>
+
 
       <footer className="footer-area">
         <div className="container">

@@ -42,7 +42,7 @@ export function MainListItems() {
         
           <HomeIcon />
           
-        <ListItemText primary="Dashboard" style={{ paddingLeft: "30px" }} />   
+        <ListItemText primary="Dashboard" style={{ paddingLeft: "35px" }} />   
     </MenuItem> 
     
         {/* ================= */}         
@@ -58,7 +58,7 @@ export function MainListItems() {
         
           <PeopleIcon />       
         <ListItemText primary="Users" 
-          style={{ paddingLeft: "30px" }}
+          style={{ paddingLeft: "35px" }}
         />
       
       </MenuItem> 
@@ -75,7 +75,7 @@ export function MainListItems() {
 
         <ImportContactsOutlinedIcon />
         <ListItemText primary="More"
-          style={{ paddingLeft: "30px" }}
+          style={{ paddingLeft: "35px" }}
         />
 
       </MenuItem> 
@@ -118,7 +118,7 @@ export const secondaryListItems = (
       }}>
       <SettingsIcon />
       <ListItemText primary="Setting"
-        style={{ paddingLeft: "30px" }}
+        style={{ paddingLeft: "35px" }}
       />
     </MenuItem> 
   </div>

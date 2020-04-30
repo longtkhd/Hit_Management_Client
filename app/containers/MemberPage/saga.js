@@ -36,6 +36,7 @@ export function* fetchGetAllUser(action){
   }catch(error){
     yield put(getAllUserFalseAction({error}));
     console.log("error");
+    localStorage.clear();
 
   }
 }
