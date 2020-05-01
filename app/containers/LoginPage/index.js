@@ -29,9 +29,10 @@ import bg from '../../images/pages/login.jpg'
 import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
 import CustomizedSnackbars from '../../components/SnackBar/index'
 import { closeSnackbar} from '../MemberPage/actions';
+import logo from '../../assets/img/home/asset2.png'
 
 
-import logo from '../../images/logos/LogoHIT.png';
+// import logo from '../../images/logos/LogoHIT.png';
 
 function Copyright() {
   return (
@@ -92,7 +93,7 @@ export function SignIn(props) {
   useEffect(() => {  
     const isAuth = localStorage.getItem('isAuthenticated');
     if (props.signIn.logined || isAuth) {
-      props.history.push('/admin/dashboard');
+      props.history.push('/admin');
       props.dispatch(logOut());
     }
   }), [];
@@ -128,13 +129,14 @@ export function SignIn(props) {
         
 
         <Link className={classes.logoLink} to="/">
-        <img align="center"
+        {/* <img align="center"
           className={classes.logoImage}
           // src="/images/logos/brainalytica_logo.svg"
           alt="anh"
           src={logo}
           style={{ width: "80px" ,marginRight:'10px'}}
-        />
+        /> */}
+        <h2>Login</h2>
           {/* <FavoriteTwoToneIcon color='secondary' align="center"/> */}
       </Link>
        

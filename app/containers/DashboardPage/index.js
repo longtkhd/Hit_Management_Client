@@ -53,7 +53,7 @@ export  function DashboardPage(props) {
         
       </Typography> */}
       <Grid container spacing={3}>
-        <Grid item xs={3}>
+        {/* <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
         </Grid>
         <Grid item xs={3}>
@@ -61,10 +61,10 @@ export  function DashboardPage(props) {
         </Grid>
         <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
-        <Grid item xs={3}>
+        </Grid> */}
+        {/* <Grid item xs={3}>
           <Paper className={classes.paper}>xs=3</Paper>
-        </Grid>
+        </Grid> */}
         <Grid item xs={8}>
           {/* <Paper className={classes.paper}>xs=8</Paper> */}
           <Demo/>

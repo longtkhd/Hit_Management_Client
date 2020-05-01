@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import logo from '../../../../assets/img/logo.png'
 import whitelogo from '../../../../assets/img/hitlogo.png'
 import BASE_CLIENT from '../../../../urlConfig';
+import { Link } from 'react-router-dom';
 
 export default function Nav(props) {
   const [scrolled, setScrooled] = useState(false);
@@ -34,10 +35,10 @@ export default function Nav(props) {
               </button>
               <div className="collapse navbar-collapse offset" id="navbarSupportedContent">
                 <ul className="nav navbar-nav menu_nav justify-content-end">
-                  <li className={props.active == 'home' ? "nav-item  active" : 'nav-item'  }><a className="nav-link" href="http://localhost:3000">Trang chủ</a></li>
-                  <li className={props.active == 'about' ? "nav-item  active" : 'nav-item'}><a className="nav-link" href="http://localhost:3000/about">About</a></li>
-                  <li className="nav-item"><a className="nav-link" href="about.html">Đội ngũ phát triển</a></li>
-                  <li className="nav-item"><a className="nav-link" href="package.html">Thành viên</a>
+                  <li className={props.active == 'home' ? "nav-item  active" : 'nav-item'}><Link className="nav-link" to="/">Trang chủ</Link></li>
+                  <li className={props.active == 'about' ? "nav-item  active" : 'nav-item'}><Link className="nav-link" to="/about">About</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/dev">Đội ngũ phát triển</Link></li>
+                  <li className="nav-item"><Link className="nav-link" to="/member">Thành viên</Link>
                   </li><li className="nav-item submenu dropdown">
                     <a href="#" className="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tin tức</a>
                     {/* <ul class="dropdown-menu">
@@ -55,7 +56,7 @@ export default function Nav(props) {
         <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li> */}
                 </ul>
                 <div className="nav-right text-center text-lg-right py-4 py-lg-0">
-                  <a className="button" href="http://localhost:3000/login">Đăng nhập</a>
+                  <Link className="button" to="/login">Đăng nhập</Link>
                 </div>
               </div>
             </div>

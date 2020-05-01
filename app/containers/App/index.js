@@ -34,6 +34,7 @@ const MemberPage = lazy(() => import("../MemberPage"));
 const Dashboard = lazy(() => import("../Dashboard/index"));
 const NotFoundPage = lazy(() => import("containers/NotFoundPage/Loadable"));
 const DashboardPage = lazy(() => import("../DashboardPage/index"));
+const Profile = lazy(() => import("../Profile/index"));
 const About = lazy(() =>  import ('../Home/component/About'));
 import Home from '../Home/index'
 
@@ -45,12 +46,9 @@ export default function App() {
     <Router history={history}>
       <Suspense fallback={<CircularIndeterminate></CircularIndeterminate>} >
         <AppWrapper>
-          <Switch>
-           
+          <Switch>           
             <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            
-           
+            <Route exact path="/about" component={About} />                       
                 <PrivateRoute
                   exact
                   path="/admin"
@@ -60,7 +58,7 @@ export default function App() {
                 />
                 {/* User in dashboard ============= */}
                 <PrivateRoute
-                   exact
+                  exact
                   path="/admin/user"
                   layout={Dashboard}
                   component={MemberPage}
@@ -72,6 +70,13 @@ export default function App() {
                   path="/admin/dashboard"
                   layout={Dashboard}
                   component={DashboardPage}
+                  title="Dashboard Page"
+                />
+                <PrivateRoute
+                  exact
+                  path="/admin/profile"
+                  layout={Dashboard}
+                  component={Profile}
                   title="Dashboard Page"
                 />
               <Route path="/login" component={LoginPage} />
