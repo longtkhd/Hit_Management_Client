@@ -34,7 +34,9 @@ const MemberPage = lazy(() => import("../MemberPage"));
 const Dashboard = lazy(() => import("../Dashboard/index"));
 const NotFoundPage = lazy(() => import("containers/NotFoundPage/Loadable"));
 const DashboardPage = lazy(() => import("../DashboardPage/index"));
+const About = lazy(() =>  import ('../Home/component/About'));
 import Home from '../Home/index'
+
 
 
 
@@ -46,6 +48,7 @@ export default function App() {
           <Switch>
            
             <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
             
            
                 <PrivateRoute
