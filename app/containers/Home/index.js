@@ -27,6 +27,7 @@ import trovetuoitho from '../../assets/img/Travel/trovetuoitho.png'
 import banrom from '../../assets/img/Travel/banrom.png'
 import bavi from '../../assets/img/Travel/bavi.png'
 import trav1 from '../../assets/img/Travel/blog-2.png';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
   
@@ -48,7 +49,7 @@ export default function Home() {
             <div className="col-md-6 col-lg-5 mb-5 mb-md-0">
               <h1 style = {{fontWeight:'bold',fontSize:'40px'}}>Chào Mừng Đến Với CLB HIT</h1>
               <p style={{ fontSize: '20px' }}>CLB HIT là một câu lạc bộ học thuật của Khoa CNTT trường đại học Công Nghiệp Hà Nội,trụ sở tại tầng 9 nhà A1 CS1 </p>
-              <a className="button button-hero mt-4" href="#">Đăng Nhập</a>
+              <Link className="button button-hero mt-4" to="/login">Đăng Nhập</Link>
             </div>
             <div className="col-md-6 col-lg-7 col-xl-6 offset-xl-1">
               <img className="img-fluid" src={banner1} alt="banner-1" />

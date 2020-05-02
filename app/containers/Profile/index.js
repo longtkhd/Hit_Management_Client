@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,18 @@ import HomeIcon from '@material-ui/icons/Home';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import StayCurrentPortraitIcon from '@material-ui/icons/StayCurrentPortrait';
 import WcIcon from '@material-ui/icons/Wc';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import makeSelectProfile from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+import { getUserById, getUserByIdSuccess, getUserByIdFailed } from './actions';
+import {BASE_URL} from '../../urlConfig'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,8 +59,21 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-export default function Profile() {
+export  function Profile(props) {
   const classes = useStyles();
+  useInjectReducer({ key: 'profile', reducer });
+  useInjectSaga({ key: 'profile', saga });
+  const {profile} = props;
+  // console.log(`${BASE_URL}`)
+
+  useEffect(() => {
+    const id = props.match.params.id;
+    props.onGetUsersId(id);
+    
+   
+
+  }, []);
+  console.log(props.profile)
 
   return (
     <div className={classes.root}>
@@ -62,16 +87,16 @@ export default function Profile() {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={`${test}`}
+                image={`${BASE_URL}/user/${props.match.params.id}/avatar/large`}
+                
                   title="Contemplative Reptile"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Jennie Kim
+                    {profile.users.fullName}
           </Typography>
                   <Typography variant="body2" color="textSecondary" component="p">
-                    Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                    across all continents except Antarctica
+                  {profile.users.bio}
           </Typography>
                 </CardContent>
               </CardActionArea>
@@ -79,20 +104,16 @@ export default function Profile() {
                 <Button size="small" color="primary">
                   Follow
         </Button>
-                <Button size="small" color="primary">
-                 Message
+                <Button size="small" color="primary">                 Message
         </Button>
               </CardActions>
-            </Card>
-            
-         
+            </Card>                    
         </Grid>
 
         <Grid item xs={8}>
           <Paper className={classes.paper}> 
             More
-          </Paper>
-       
+          </Paper>       
           
         </Grid>
         <Grid item xs={4}>
@@ -103,16 +124,16 @@ export default function Profile() {
                 About
           </Typography>
               <Typography color="textSecondary" component="h1" className={classes.about} >
-                <HomeIcon /> Live in : Hải Dương
+              <HomeIcon /> Live in : { profile.users.address }
             </Typography>
               <Typography color="textSecondary" component="h1" className={classes.about}>
-                <EmojiPeopleIcon /> Age : 20
+              <EmojiPeopleIcon /> Age : {profile.users.dob}
             </Typography>
               <Typography color="textSecondary" component="h1" className={classes.about}>
-                <StayCurrentPortraitIcon />  Phone : 0353792709
+                <StayCurrentPortraitIcon />  Phone : {profile.users.phone}
             </Typography>
               <Typography color="textSecondary" component="h1" className={classes.about}>
-                <WcIcon />  Gender : Male
+              <WcIcon />  Gender : {profile.users.gender}
             </Typography>
 
 
@@ -127,3 +148,29 @@ export default function Profile() {
     </div>
   );
 }
+
+const mapStateToProps = createStructuredSelector({
+  profile: makeSelectProfile(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+   
+    onGetUsersId: id => dispatch(getUserById(id)),
+    
+
+
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  // withStyles(styles),
+  withConnect,
+)(Profile);
+

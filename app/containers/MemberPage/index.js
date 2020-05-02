@@ -41,6 +41,11 @@ import AddUserPage from '../AddUserPage/index';
 import DialogAlert from '../../components/DialogAlert';
 import {BASE_URL} from '../../urlConfig'
 import Chip from '@material-ui/core/Chip';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import {Link} from 'react-router-dom';
+import MenuItem from '@material-ui/core/MenuItem';
+// import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
+import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 
 import CustomizedSnackbars from '../../components/SnackBar/index'
 // import { Delete} from '@material-ui/icons'
@@ -466,9 +471,16 @@ const handleReset = () => {
                             < AddUserPage isEditcheck={true} Editdatas={ row} />                         
                         </IconButton>
                       </Tooltip>
+
+                      
                       
                         
                         </TableCell>
+                      <TableCell component={Link} align="left" to={`/admin/profile/${row._id}`}>
+                        < AccountCircleSharpIcon  ></AccountCircleSharpIcon>
+                            {/* <Link to={`admin/profile/${row._id}`} /> */}
+                      </TableCell>
+                      
                       
                        
                       

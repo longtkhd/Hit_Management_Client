@@ -73,8 +73,8 @@ export default function App() {
                   title="Dashboard Page"
                 />
                 <PrivateRoute
-                  exact
-                  path="/admin/profile"
+                exact
+                  path="/admin/profile/:id"
                   layout={Dashboard}
                   component={Profile}
                   title="Dashboard Page"
