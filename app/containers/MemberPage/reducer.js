@@ -29,7 +29,9 @@ const memberPageReducer = (state = initialState, action) =>
         draft.success = false;
         break;
       case GET_USER_SUCCESS:
+        // draft.userData.repositories = action.repos;
         draft.loading = false;
+        // draft.currentUser = action.username;
         draft.error = false;
         draft.success = true;
         draft.users = action.data.users;
@@ -38,7 +40,29 @@ const memberPageReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.success = false;
         draft.error = false;
-        break;       
+        break;
+
+      case DELETE_USER:
+        draft.loading = true;
+        draft.success = false;
+        draft.error = false;
+        break ;
+
+
+      case DELETE_USER_SUCCESS:
+        draft.loading = true;
+        draft.success = true;
+        draft.error = false;
+        break;
+
+      case CLOSE_SNACKBAR:
+        draft.status = false;
+        break;
+      case CHANGE_SNACKBAR:
+        draft.status = action.data.status;
+        draft.message = action.data.message;
+        draft.color = action.data.color;
+        break;      
     }
   });
 
