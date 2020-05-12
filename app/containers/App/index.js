@@ -28,7 +28,7 @@ const AppWrapper = styled.div`
   flex-direction: column;
   
 `;
-
+import Home from '../Home/index'
 const LoginPage = lazy(() => import("../LoginPage"));
 const MemberPage = lazy(() => import("../MemberPage"));
 const Dashboard = lazy(() => import("../Dashboard/index"));
@@ -36,7 +36,7 @@ const NotFoundPage = lazy(() => import("containers/NotFoundPage/Loadable"));
 const DashboardPage = lazy(() => import("../DashboardPage/index"));
 const Profile = lazy(() => import("../Profile/index"));
 const About = lazy(() =>  import ('../Home/component/About'));
-import Home from '../Home/index'
+
 
 
 

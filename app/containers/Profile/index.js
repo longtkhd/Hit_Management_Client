@@ -10,7 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import test from '../../assets/img/avatar/longtkhd.jpg'
+// import test from '../../assets/img/avatar/longtkhd.jpg'
 import HomeIcon from '@material-ui/icons/Home';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import StayCurrentPortraitIcon from '@material-ui/icons/StayCurrentPortrait';

@@ -24,7 +24,7 @@ import makeSelectSignIn from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { login, logOut } from './actions';
-import bg from '../../images/pages/login.jpg'
+// import bg from '../../images/pages/login.jpg'
 // import logo from '../../images/logos/LogoHIT.png'
 import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
 import CustomizedSnackbars from '../../components/SnackBar/index'
@@ -49,7 +49,7 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
     root: {
-    backgroundImage: `url(${bg})`,
+    // backgroundImage: `url(${bg})`,
 
    
     height: '100%',

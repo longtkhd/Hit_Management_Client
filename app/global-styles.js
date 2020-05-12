@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import bg from './images/pages/login.jpg';
 // import 'antd/dist/antd.css';
 
 const GlobalStyle = createGlobalStyle`
@@ -8,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100% ;
     line-height: 1.5;
-     background-image : url("./images/pages/login.jpg") !important;
+   
      font-size:15px !important;
      font-family: 'Nunito Sans', sans-serif !important;
   }

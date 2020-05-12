@@ -1,7 +1,7 @@
 import React  from 'react';
 import '../../assets/css/style.css';
-import '../../assets/css/spinner.css';
-import '../../assets/css/aos/dist/aos.css';
+// import '../../assets/css/spinner.css';
+// import '../../assets/css/aos/dist/aos.css';
 import 'bootstrap/dist/css/bootstrap.css';
 // import   '../../assets/js/main';
 import Nav from './component/navigation/index'
@@ -309,7 +309,7 @@ export default function Home() {
       <section className="section-padding bg-gray">
         <div className="container">
           <div className="section-intro text-center pb-90px">
-            <img className="section-intro-img" src="img/home/section-icon.png" alt="" />
+            <img className="section-intro-img" src="#" alt="" />
             <h2>From our Blog</h2>
             <p>Fowl have fruit moveth male they are that place you will lesser</p>
           </div>
@@ -419,14 +419,14 @@ export default function Home() {
               <div className="single-footer-widget mail-chimp">
                 <h6 className="mb-20">InstaFeed</h6>
                 <ul className="instafeed d-flex flex-wrap">
-                  <li><img src="img/instagram/i1.jpg" alt="" /></li>
+                  {/* <li><img src="img/instagram/i1.jpg" alt="" /></li>
                   <li><img src="img/instagram/i2.jpg" alt="" /></li>
                   <li><img src="img/instagram/i3.jpg" alt="" /></li>
                   <li><img src="img/instagram/i4.jpg" alt="" /></li>
                   <li><img src="img/instagram/i5.jpg" alt="" /></li>
                   <li><img src="img/instagram/i6.jpg" alt="" /></li>
                   <li><img src="img/instagram/i7.jpg" alt="" /></li>
-                  <li><img src="img/instagram/i8.jpg" alt="" /></li>
+                  <li><img src="img/instagram/i8.jpg" alt="" /></li> */}
                 </ul>
               </div>
             </div>
