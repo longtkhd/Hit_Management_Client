@@ -29,7 +29,9 @@ import { login, logOut } from './actions';
 import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
 import CustomizedSnackbars from '../../components/SnackBar/index'
 import { closeSnackbar} from '../MemberPage/actions';
-import logo from '../../assets/img/home/asset2.png'
+import logo from '../../assets/img/home/asset2.png';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+
 
 
 // import logo from '../../images/logos/LogoHIT.png';
@@ -136,7 +138,7 @@ export function SignIn(props) {
           src={logo}
           style={{ width: "80px" ,marginRight:'10px'}}
         /> */}
-        <h2>Login</h2>
+          <LockOpenIcon fontSize='large' color= "action"/> 
           {/* <FavoriteTwoToneIcon color='secondary' align="center"/> */}
       </Link>
        
