@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 // import logo from '../../assets/img/logo.png'
-import logo from '../../../../assets/img/logo.png'
-import whitelogo from '../../../../assets/img/hitlogo.png'
+import logo from '../../../../assets/img/l1.png'
+import whitelogo from '../../../../assets/img/l2.png'
 import BASE_CLIENT from '../../../../urlConfig';
 import { Link } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ export default function Nav(props) {
         <div className="main_menu" >
           <nav className="navbar navbar-expand-lg  ">
             <div className="container box_1620  ">
-              <a className="navbar-brand logo_h" ><img className="logoNavbar logo-hit" src={scrolled ? logo : whitelogo} alt="logo" /></a>
+              <a className="navbar-brand logo_h" ><img className="logoNavbar logo-hit" src={scrolled ? logo : whitelogo} alt="logo"  /></a>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="icon-bar" />
                 <span className="icon-bar" />
