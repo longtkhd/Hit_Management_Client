@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 // import logo from '../../assets/img/logo.png'
 import logo from '../../../../assets/img/l1.png'
 import whitelogo from '../../../../assets/img/l2.png'
-import BASE_CLIENT from '../../../../urlConfig';
+// import BASE_CLIENT from '../../../../urlConfig';
 import { Link } from 'react-router-dom';
 
 export default function Nav(props) {
@@ -11,10 +11,10 @@ export default function Nav(props) {
   useEffect(() => {
     window.addEventListener('scroll', () => {
       const isTop = window.scrollY < 100;
-      console.log(window.scrollY);
+      // console.log(window.scrollY);
       if (isTop !== true) {
         setScrooled(true);
-        console.log(scrolled);
+        // console.log(scrolled);
       } else {
         setScrooled(false);
       }

@@ -8,11 +8,10 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import { ValidatorForm } from 'react-material-ui-form-validator';
 // inject
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -26,10 +25,10 @@ import saga from './saga';
 import { login, logOut } from './actions';
 // import bg from '../../images/pages/login.jpg'
 // import logo from '../../images/logos/LogoHIT.png'
-import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
-import CustomizedSnackbars from '../../components/SnackBar/index'
-import { closeSnackbar} from '../MemberPage/actions';
-import logo from '../../assets/img/home/asset2.png';
+// import FavoriteTwoToneIcon from '@material-ui/icons/FavoriteTwoTone';
+// import CustomizedSnackbars from '../../components/SnackBar/index'
+// import { closeSnackbar} from '../MemberPage/actions';
+// import logo from '../../assets/img/home/asset2.png';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 
@@ -213,7 +212,7 @@ export function SignIn(props) {
 }
 SignIn.propTypes = {
   // dispatch: PropTypes.func.isRequired,
-  classes: PropTypes.object.isRequired,
+  // classes: PropTypes.object.isRequired,
 
   signIn: PropTypes.object,
 };
