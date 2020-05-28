@@ -72,14 +72,15 @@ export default function App() {
                   component={DashboardPage}
                   title="Dashboard Page"
                 />
-                <PrivateRoute
+                {/* <PrivateRoute
                 exact
                   path="/admin/profile/:id"
                   layout={Dashboard}
                   component={Profile}
                   title="Dashboard Page"
-                />
+                /> */}
               <Route path="/login" component={LoginPage} />
+            <Route path="/user/profile/:id" component={Profile} />
                 {/* Dashboard Page=================== */}
                 <Route path="*" component={NotFoundPage} />
                 {/* NotFound ========================*/} 

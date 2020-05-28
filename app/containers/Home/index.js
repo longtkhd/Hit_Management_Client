@@ -62,7 +62,7 @@ export default function Home() {
         <div className="container">
           <div className="section-intro text-center pb-90px">
             
-            <h1>Tiêu Chí Hoạt Động</h1>
+            <h1>Tiêu Chí Hoạt Động (test build)</h1>
           </div>
           <div className="row">
             <div className="col-md-6 col-lg-4 mb-4 mb-lg-0">
@@ -259,8 +259,8 @@ export default function Home() {
                 </div>
                 <div className="col-md-9 col-lg-10">
                   <div className="testimonial__content mt-3 mt-sm-0">
-                    <h3>Daniel heart</h3>
-                    <p>Project manager, Nestle</p>
+                    <h3> Nguyễn Đức Linh</h3>
+                    <p>Chủ Nhiệm CLB</p>
                     <p className="testimonial__i">Also made from. Give may saying meat there from heaven it lights face had is gathered god earth light for life may itself shall whales made they're blessed whales also made from give may saying meat. There from heaven it lights face had</p>
                     <span className="testimonial__icon"><i className="ti-quote-right" /></span>
                   </div>
@@ -276,8 +276,8 @@ export default function Home() {
                 </div>
                 <div className="col-md-9 col-lg-10">
                   <div className="testimonial__content mt-3 mt-sm-0">
-                    <h3>Daniel heart</h3>
-                    <p>Project manager, Nestle</p>
+                    <h3>Đoàn Phùng Tú</h3>
+                    <p>Phó Chủ Nhiệm Học Tập</p>
                     <p className="testimonial__i">Also made from. Give may saying meat there from heaven it lights face had is gathered god earth light for life may itself shall whales made they're blessed whales also made from give may saying meat. There from heaven it lights face had</p>
                     <span className="testimonial__icon"><i className="ti-quote-right" /></span>
                   </div>
@@ -293,8 +293,8 @@ export default function Home() {
                 </div>
                 <div className="col-md-9 col-lg-10">
                   <div className="testimonial__content mt-3 mt-sm-0">
-                    <h3>Daniel heart</h3>
-                    <p>Project manager, Nestle</p>
+                    <h3>Hoàng Thị Bích Ngọc</h3>
+                    <p>Phó Chủ Nhiệm Hoạt Động</p>
                     <p className="testimonial__i">Also made from. Give may saying meat there from heaven it lights face had is gathered god earth light for life may itself shall whales made they're blessed whales also made from give may saying meat. There from heaven it lights face had</p>
                     <span className="testimonial__icon"><i className="ti-quote-right" /></span>
                   </div>

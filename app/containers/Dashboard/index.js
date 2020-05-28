@@ -171,7 +171,7 @@ export  function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Dashboard 
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">

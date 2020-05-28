@@ -448,7 +448,7 @@ const handleReset = () => {
                         <div className={classes.nameContainer}>
                           <Avatar
                             className={classes.avatar}
-                            src={`${BASE_URL}/user/${row._id}/avatar/large`}
+                            src={`${BASE_URL}/avatar/${row.avatar}`}
                           >                           
                           </Avatar>
                           <Typography variant="body1">{row.fullName}</Typography>
