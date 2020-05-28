@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import dashboardImg from '../../images/HIT/Hit.jpg'
 import welcomeImg from '../../images/HIT/chaomunghit.png';
 import welcomImg1 from'../../images/HIT/asset4.png'
-import UserChart from './component/userPieChart';
+// import UserChart from './component/userPieChart';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectMemberPage from '../MemberPage/selectors';
@@ -70,7 +70,7 @@ export  function DashboardPage(props) {
           <Demo/>
         </Grid>
         <Grid item xs={4}>
-        <UserChart/>
+        {/* <UserChart/> */}
         </Grid>
       </Grid>
       <Divider className={classes.divider} />
