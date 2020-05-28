@@ -165,7 +165,6 @@ export  function Profile(props) {
   // console.log(user._id)
   // console.log(`${BASE_URL}`)
   const id = props.match.params.id;
- console.log(props.profile)
 
   useEffect(() => {
    
@@ -261,7 +260,7 @@ export  function Profile(props) {
           <Grid container lg={12}>
             <Grid item lg={5} sm={12} className={classes.avatar}>
               <img className = {classes.imgs}
-                src={user ? `${BASE_URL}/avatar/${user.avatar}` : null}
+                src={user ? `${BASE_URL}/user/${id}/avatar/large` : null}
                 alt={user ? user.fullName : null}
               />
             </Grid>
