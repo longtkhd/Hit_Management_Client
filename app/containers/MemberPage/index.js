@@ -448,7 +448,7 @@ const handleReset = () => {
                         <div className={classes.nameContainer}>
                           <Avatar
                             className={classes.avatar}
-                            src={`${BASE_URL}/user/${row._id}/avatar/large`}
+                            src={`${BASE_URL}/avatar/${row.avatar}`}
                           >                           
                           </Avatar>
                           <Typography variant="body1">{row.fullName}</Typography>
@@ -476,10 +476,7 @@ const handleReset = () => {
                       
                         
                         </TableCell>
-                      <TableCell component={Link} align="left" to={`/admin/profile/${row._id}`}>
-                        < AccountCircleSharpIcon  ></AccountCircleSharpIcon>
-                            {/* <Link to={`admin/profile/${row._id}`} /> */}
-                      </TableCell>
+                      
                       
                       
                        

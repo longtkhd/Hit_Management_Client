@@ -130,7 +130,7 @@ export function AddUserPage(props) {
       setDob(props.Editdatas.dob);
       setPosition(props.Editdatas.position);
       setGender(props.Editdatas.gender);
-      setIsActive(props.Editdatas.isActive.toString());
+      setIsActive(props.Editdatas.isActive);
       setBio(props.Editdatas.bio);
       setAvatar(props.Editdatas.avatar);
       setQrCode(props.Editdatas.qrCode);

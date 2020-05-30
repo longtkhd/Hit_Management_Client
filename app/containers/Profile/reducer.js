@@ -25,7 +25,7 @@ const profileReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = false;
         draft.success = true;
-        draft.users = action.data.user;
+        draft.users = action.data;
         // console.log(action.data.user)
         break;
       case GET_USER_ID_FAILED:

@@ -14,9 +14,7 @@ export function* fetchGetAllUserById(action) {
 
       url: `${USER}/get/${action.id}`,
       method: 'GET',
-      headers: {
-        "x-access-token": `${localStorage.getItem('token')}`,
-      },
+      
 
     });
 
